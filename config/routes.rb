@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   #利用者用
   #URL /end_users/sign_in …
   devise_for :end_users, skip: [:passwords], controllers: {
-    registrations: "public/registations",
+    registrations: "public/registrations",
     sessions: "public/sessions"
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
