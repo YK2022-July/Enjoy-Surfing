@@ -18,9 +18,8 @@ Rails.application.routes.draw do
 
   #利用者ページ
   get 'end_users/my_page' => 'public/end_users#show', as: 'my_page'
-  get 'public/end_users/edit'
-  get 'public/end_users/unsubscribe'
+  #get 'public/end_users/edit'
+  #get 'public/end_users/unsubscribe'
   patch 'public/end_users/cancel' => 'public/end_users#cancel', as: 'cancel'
-
-
+  resources :end_users, only: [:edit, :unsubscribe]
 end
