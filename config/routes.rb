@@ -24,8 +24,11 @@ Rails.application.routes.draw do
   #利用者ページ
   get 'end_users/my_page/:id' => 'public/end_users#show', as: 'my_page'
   get 'end_users/:id/edit' => 'public/end_users#edit', as: 'end_user_edit'
-  get 'public/end_users/unsubscribe'
-  patch 'public/end_users/cancel' => 'public/end_users#cancel', as: 'cancel'
   patch 'end_users/:id' => 'public/end_users#update', as: 'end_user_update'
   #resources :end_users, only: [:edit]
+
+  #利用者退会用
+  get 'end_users/:id/unsubscribe' => 'public/end_users#unsubscribe', as: 'unsubscribe'
+  get 'end_users/after_cancel' => 'public/end_users#after_cancel', as: 'after_cancel'
+  patch 'end_users/:id/cancel' => 'public/end_users#cancel', as: 'cancel'
 end

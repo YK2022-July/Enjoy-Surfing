@@ -46,7 +46,7 @@
     <footer>
       <% if end_user_signed_in? %>
         <li>
-          <%= link_to "退会手続き" %>
+          <%= link_to "退会手続き", unsubscribe_path(current_end_user) %>
         </li>
       <% end %>
     </footer>

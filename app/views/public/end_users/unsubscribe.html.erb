@@ -1,2 +1,26 @@
-<h1>Public::EndUsers#unsubscribe</h1>
-<p>Find me in app/views/public/end_users/unsubscribe.html.erb</p>
+<div class='container'>
+  <div class='row text-center'>
+    <div class="col">
+      <h2>退会手続き</h2>
+    </div>
+  </div>
+  <div class='row text-center'>
+    <div class="col">
+      <h4>退会手続きを実行します。</h4>
+    </div>
+    <div class="col">
+      <p>
+         下記ボタンを押すと退会手続きを実行します。
+         退会手続きをされますと、全てのサービスがご利用いただけなくなります。<br>
+         再度ご利用をいただく場合には、新規登録のお手続きが必要となります。<br>
+         本当に退会しますか？
+     </p>
+    </div>
+    <div class="col">
+      <%= link_to "はい、退会します", cancel_path, method: :patch %>
+    </div>
+    <div class="col">
+      <%= link_to "いいえ、退会しません", my_page_path(current_end_user) %>
+    </div>
+  </div>
+</div>
