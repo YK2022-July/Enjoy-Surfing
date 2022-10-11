@@ -16,7 +16,13 @@ class Public::EndUsersController < ApplicationController
   def unsubscribe
   end
 
+  #退会機能用のアクション
   def cancel
+    @end_user = EndUser.find(params[:id])
+    #退会ステータス（is_deleted）を"true"に更新し論理削除状態にする
+    @end_user.update(is_deleted: true)
+    reset_session
+    redirect_to after_cancel_path
   end
 
   private
