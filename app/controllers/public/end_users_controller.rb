@@ -1,13 +1,38 @@
 class Public::EndUsersController < ApplicationController
   def show
+    @end_user = EndUser.find(params[:id])
   end
 
   def edit
+    @end_user = EndUser.find(params[:id])
+  end
+
+  def update
+    end_user = EndUser.find(params[:id])
+    end_user.update(end_user_params)
+    redirect_to my_page_path(end_user.id)
   end
 
   def unsubscribe
   end
 
   def cancel
+  end
+
+  private
+  def end_user_params
+    params.require(:end_user).permit(
+      :area_id,
+      :type_id,
+      :name,
+      :age,
+      :sex,
+      :home,
+      :stance,
+      :history,
+      :introduction,
+      :is_deleted,
+      :end_user_image
+    )
   end
 end

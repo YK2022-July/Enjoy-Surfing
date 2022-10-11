@@ -22,9 +22,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   #利用者ページ
-  get 'end_users/my_page' => 'public/end_users#show', as: 'my_page'
-  #get 'public/end_users/edit'
-  #get 'public/end_users/unsubscribe'
+  get 'end_users/my_page/:id' => 'public/end_users#show', as: 'my_page'
+  get 'end_users/:id/edit' => 'public/end_users#edit', as: 'end_user_edit'
+  get 'public/end_users/unsubscribe'
   patch 'public/end_users/cancel' => 'public/end_users#cancel', as: 'cancel'
-  resources :end_users, only: [:edit, :unsubscribe]
+  patch 'end_users/:id' => 'public/end_users#update', as: 'end_user_update'
+  #resources :end_users, only: [:edit]
 end
