@@ -13,4 +13,12 @@ class EndUser < ApplicationRecord
     end
     user_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  #ゲストユーザー機能のメソッド
+  def self.guest
+    find_or_create_by!(name: 'guestuser', email: 'guest@example.com') do |end_user|
+      end_user.password = SecureRandom.urlsafe_base64
+      end_user.name = "ゲスト"
+    end
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_08_061547) do
+ActiveRecord::Schema.define(version: 2022_10_11_012859) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2022_10_08_061547) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "area_id"
+    t.string "type_id"
+    t.string "name", default: "ユーザー", null: false
+    t.string "age"
+    t.string "sex"
+    t.string "home"
+    t.string "stance"
+    t.string "history"
+    t.text "introduction"
+    t.boolean "is_deleted", default: false, null: false
     t.index ["email"], name: "index_end_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
