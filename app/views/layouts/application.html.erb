@@ -11,9 +11,19 @@
   </head>
 
   <body>
+    <header>
     <% if end_user_signed_in? %>
       <li>
         <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
+      </li>
+      <li>
+        <%= link_to "TOP", root_path %>
+      </li>
+      <li>
+        <%= link_to "MyPage", my_page_path(current_end_user.id) %>
+      </li>
+      <li>
+        <%= link_to "みんなの記録" %>
       </li>
     <% else %>
       <li>
@@ -28,6 +38,17 @@
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
       </li>
     <% end %>
+    </header>
+    <main>
+    <p class="notice"><%= notice %></p>
     <%= yield %>
+    </main>
+    <footer>
+      <% if end_user_signed_in? %>
+        <li>
+          <%= link_to "退会手続き" %>
+        </li>
+      <% end %>
+    </footer>
   </body>
 </html>

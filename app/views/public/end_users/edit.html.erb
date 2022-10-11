@@ -1,2 +1,52 @@
-<h1>Public::EndUsers#edit</h1>
-<p>Find me in app/views/public/end_users/edit.html.erb</p>
+<div class='container'>
+  <div class='row text-center'>
+    <div class="col">
+      <h1>プロフィール編集</h1>
+    </div>
+  </div>
+  <div class='row text-center'>
+    <div class="col">
+      <%= form_with model: @end_user, url: end_user_update_path(@end_user.id), method: :patch do |end_user| %>
+        <div>ニックネーム</div>
+        <div>
+          <%= end_user.text_field :name %>
+        </div>
+        <div>年齢</div>
+        <div>
+          <%= end_user.text_field :age %>
+        </div>
+        <div>性別</div>
+        <div>
+          <%= end_user.text_field :sex %>
+        </div>
+        <div>エリア</div>
+        <div>
+          <%= end_user.text_field :area_id %>
+        </div>
+        <div>ホーム</div>
+        <div>
+          <%= end_user.text_field :home %>
+        </div>
+        <div>種目</div>
+        <div>
+          <%= end_user.text_field :type_id %>
+        </div>
+        <div>スタンス</div>
+        <div>
+          <%= end_user.text_field :stance %>
+        </div>
+        <div>サーフィン歴</div>
+        <div>
+          <%= end_user.text_field :history %>
+        </div>
+        <div>自己紹介</div>
+        <div>
+          <%= end_user.text_area :introduction %>
+        </div>
+        <div>
+          <%= end_user.submit '更新' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
