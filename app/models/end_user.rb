@@ -4,6 +4,8 @@ class EndUser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :training_posts, dependent: :destroy
+
   has_one_attached :user_image
 
   #プロフィール画像の取得メソッド
