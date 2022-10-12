@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get 'training_posts/index' => 'public/training_posts#index', as: 'training_posts_index'
   get 'training_posts/:id/show' => 'public/training_posts#show', as: 'training_posts_show'
   get 'training_posts/:id/edit' => 'public/training_posts#edit', as: 'training_posts_edit'
-  patch 'training_posts/:id' => 'public/training_posts#update'
-  delete 'training_posts/:id' => 'public/training_posts#destroy'
+  patch 'training_posts/:id' => 'public/training_posts#update', as: 'training_posts_update'
+  delete 'training_posts/:id' => 'public/training_posts#destroy', as: 'training_posts_destroy'
 
 end
