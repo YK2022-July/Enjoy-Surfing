@@ -6,6 +6,7 @@ class EndUser < ApplicationRecord
 
   has_one_attached :user_image
 
+  #プロフィール画像の取得メソッド
   def get_user_image(width, height)
     unless user_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -14,11 +15,16 @@ class EndUser < ApplicationRecord
     user_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  #ゲストユーザー機能のメソッド
+  #ゲストログイン機能のメソッド
   def self.guest
     find_or_create_by!(name: 'ゲスト', email: 'guest@example.com') do |end_user|
       end_user.password = SecureRandom.urlsafe_base64
       end_user.name = "ゲスト"
     end
+  end
+
+  #ログイン時の退会ステータスの判定メソッド
+  def active_for_authentication?
+    super && (is_deleted == false)
   end
 end
