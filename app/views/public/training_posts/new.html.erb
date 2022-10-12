@@ -9,12 +9,12 @@
       <%= form_with model: TrainingPost, method: :post do |training_post| %>
         <div>練習日</div>
         <div>
-          <%= training_post.text_field :date %>
+          <%= training_post.date_field :date %>
         </div>
         <div>練習時間</div>
         <div>
-          <%= training_post.text_field :start_time %>
-          <%= training_post.text_field :end_time %>
+          開始<%= training_post.time_field :start_time %>
+          終了<%= training_post.time_field :end_time %>
         </div>
         <div>ラウンド</div>
         <div>
@@ -22,7 +22,7 @@
         </div>
         <div>エリア</div>
         <div>
-          <%= training_post.text_field :area %>
+          <%#= training_post.text_field :area %>
         </div>
         <div>ポイント</div>
         <div>
@@ -54,6 +54,7 @@
         </div>
         <div>着用ウェットスーツ</div>
         <div>
+          <%#= training_post.select :wetsuit [['トランクス'], ['ラッシュガード'], ['タッパー'], ['スプリング'], ['ショートジョン'], ['ロングジョン'], [''], ['ドライスーツ']], { include_blank: true, selected: 1 }, { id: "user_id", class: "user_class" } %>
           <%= training_post.text_field :wetsuit %>
         </div>
         <div>テイクオフ回数</div>
@@ -62,7 +63,7 @@
         </div>
         <div>画像選択</div>
         <div>
-          <%#= training_post.text_field :history %>
+          <%= training_post.file_field :post_image, accept: "image/*" %>
         </div>
         <div>メモ</div>
         <div>
@@ -73,5 +74,8 @@
         </div>
       <% end %>
     </div>
+  </div>
+  <div>
+    <%= link_to "戻る", my_page_path(current_end_user.id) %>
   </div>
 </div>

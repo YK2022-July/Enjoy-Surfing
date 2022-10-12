@@ -1,2 +1,78 @@
-<h1>Public::TrainingPosts#edit</h1>
-<p>Find me in app/views/public/training_posts/edit.html.erb</p>
+<div class='container'>
+  <div class='row text-center'>
+    <div class="col">
+      <h1>記録の編集</h1>
+    </div>
+  </div>
+  <div class='row text-center'>
+    <div class="col">
+      <%= form_with model: @training_post, url: training_posts_update_path(@training_post.id), method: :patch do |training_post| %>
+        <div>練習日</div>
+        <div>
+          <%= training_post.date_field :date %>
+        </div>
+        <div>練習時間</div>
+        <div>
+          開始<%= training_post.time_field :start_time %>
+          終了<%= training_post.time_field :end_time %>
+        </div>
+        <div>ラウンド</div>
+        <div>
+          <%= training_post.text_field :round %>
+        </div>
+        <div>エリア</div>
+        <div>
+          <%#= training_post.text_field :area %>
+        </div>
+        <div>ポイント</div>
+        <div>
+          <%= training_post.text_field :point %>
+        </div>
+        <div>天気</div>
+        <div>
+          <%= training_post.text_field :weather %>
+        </div>
+        <div>風向き</div>
+        <div>
+          <%= training_post.text_field :wind%>
+        </div>
+        <div>コンディション</div>
+        <div>
+          <%= training_post.text_field :condition %>
+        </div>
+        <div>波サイズ</div>
+        <div>
+          <%= training_post.text_field :size %>
+        </div>
+        <div>人数</div>
+        <div>
+          <%= training_post.text_field :people %>
+        </div>
+        <div>使用ボード</div>
+        <div>
+          <%= training_post.text_field :board %>
+        </div>
+        <div>着用ウェットスーツ</div>
+        <div>
+          <%#= training_post.select :wetsuit [['トランクス'], ['ラッシュガード'], ['タッパー'], ['スプリング'], ['ショートジョン'], ['ロングジョン'], [''], ['ドライスーツ']], { include_blank: true, selected: 1 }, { id: "user_id", class: "user_class" } %>
+          <%= training_post.text_field :wetsuit %>
+        </div>
+        <div>テイクオフ回数</div>
+        <div>
+          <%= training_post.text_field :take_off %>
+        </div>
+        <div>画像選択</div>
+        <div>
+          <%#= training_post.file_field :post_image, accept: "image/*" %>
+        </div>
+        <div>メモ</div>
+        <div>
+          <%= training_post.text_area :body %>
+        </div>
+        <div>
+          <%= training_post.submit '更新' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

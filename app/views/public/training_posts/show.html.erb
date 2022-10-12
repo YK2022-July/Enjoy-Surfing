@@ -1,7 +1,88 @@
-<div class='container'>
-  <div class='row text-center'>
+<div class="container">
+  <div class="row text-center">
     <div class="col">
-      <h3><%= @training_post.date %>の<%# @end_user.name %>さんの記録</h3>
+      <%= image_tag @training_post.get_post_image(400,300) %>
     </div>
+  </div>
+  <div class="row text-center">
+    <div class="col">
+      <h3><%= @training_post.date %>の<%= @end_user.name %>さんの記録</h3>
+    </div>
+  </div>
+  <div class="row text-center justify-content-center">
+    <div class="col-4 pr-0">
+      <table class="table table-bordered table-sm">
+        <tr>
+          <th class="table-primary">練習日時</th>
+          <td>
+            <%= @training_post.date %>
+            &nbsp;
+            <%= @training_post.start_time.strftime("%H:%M") %>
+            〜
+            <%= @training_post.end_time.strftime("%H:%M") %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table-primary">ラウンド</th>
+          <td><%= @training_post.round %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">エリア／ポイント</th>
+          <td><%= @training_post.point %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">天気</th>
+          <td><%= @training_post.weather %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">風向き</th>
+          <td><%= @training_post.wind %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-4 pl-0">
+      <table class="table table-bordered table-sm">
+        <tr>
+          <th class="table-primary">コンディション</th>
+          <td><%= @training_post.condition %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">波サイズ</th>
+          <td><%= @training_post.size %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">人数</th>
+          <td><%= @training_post.people %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">使用ボード</th>
+          <td><%= @training_post.board %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">ウェットスーツ</th>
+          <td><%= @training_post.wetsuit%></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <table class="table table-bordered table-sm">
+        <thead class="table-primary text-center">
+          <tr>
+            <th scope="col">MEMO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @training_post.body %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <%= link_to "記録を編集する", training_posts_edit_path(@training_post) %>
+  </div>
   </div>
 </div>

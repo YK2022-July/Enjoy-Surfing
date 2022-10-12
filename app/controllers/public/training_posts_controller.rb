@@ -4,9 +4,11 @@ class Public::TrainingPostsController < ApplicationController
   end
 
   def create
-    training_post = TrainingPost.new(training_post_params)
-    training_post.save
-    redirect_to training_posts_show_path(training_post.id)
+    @training_post = TrainingPost.new(training_post_params)
+    @training_post.end_user_id = current_end_user.id
+    @training_post.save
+    #redirect_to training_posts_show_path(training_post.id)
+    redirect_to training_posts_show_path(@training_post.id)
   end
 
   def index
@@ -14,13 +16,18 @@ class Public::TrainingPostsController < ApplicationController
 
   def show
     @training_post = TrainingPost.find(params[:id])
-    #@end_user = EndUser.find(params[:end_user_id])
+    @end_user = @training_post.end_user
   end
 
   def edit
+    @training_post = TrainingPost.find(params[:id])
   end
 
   def update
+    training_post = TrainingPost.find(params[:id])
+    training_post.update(training_post_params)
+    redirect_to training_posts_show_path(training_post.id)
+
   end
 
   def destroy
@@ -30,7 +37,6 @@ class Public::TrainingPostsController < ApplicationController
 
   def training_post_params
     params.require(:training_post).permit(
-      :title,
       :body,
       :date,
       :start_time,
@@ -46,8 +52,9 @@ class Public::TrainingPostsController < ApplicationController
       :wetsuit,
       :take_off,
       :goal,
-      :is_active
+      :post_image
     )
   end
+
 
 end
