@@ -31,6 +31,9 @@ class Public::TrainingPostsController < ApplicationController
   end
 
   def destroy
+    @training_post = TrainingPost.find(params[:id])
+    @training_post.destroy
+    redirect_to training_posts_index_path
   end
 
   private
