@@ -69,6 +69,15 @@
         <div>
           <%= training_post.text_area :body %>
         </div>
+        <div>公開設定</div>
+        <span class="p-2">
+          <%= training_post.label :is_active, "公開", value: true %>
+          <%= training_post.radio_button :is_active, 'true' %>
+        </span>
+        <span class="p-2">
+          <%= training_post.label :is_active, "非公開", value: false %>
+          <%= training_post.radio_button :is_active,'false' %>
+        </span>
         <div>
           <%= training_post.submit '更新' %>
         </div>
