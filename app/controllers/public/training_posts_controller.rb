@@ -11,7 +11,7 @@ class Public::TrainingPostsController < ApplicationController
   end
 
   def index
-    @training_posts = TrainingPost.all.order(date: "DESC")
+    @training_posts = TrainingPost.active.order(date: "DESC")
   end
 
   def my_posts
@@ -59,7 +59,8 @@ class Public::TrainingPostsController < ApplicationController
       :wetsuit,
       :take_off,
       :goal,
-      :post_image
+      :post_image,
+      :is_active
     )
   end
 

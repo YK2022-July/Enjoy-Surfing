@@ -11,4 +11,8 @@ class TrainingPost < ApplicationRecord
     end
     post_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  #投稿の公開・非公開の条件
+  scope :active, -> {where(is_active: true)}
+  scope :inactive, -> {where(is_active: false)}
 end
