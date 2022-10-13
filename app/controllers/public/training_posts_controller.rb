@@ -7,11 +7,15 @@ class Public::TrainingPostsController < ApplicationController
     @training_post = TrainingPost.new(training_post_params)
     @training_post.end_user_id = current_end_user.id
     @training_post.save
-    #redirect_to training_posts_show_path(training_post.id)
     redirect_to training_posts_show_path(@training_post.id)
   end
 
   def index
+    @training_posts = TrainingPost.all.order(date: "DESC")
+  end
+
+  def my_posts
+    @training_posts = current_end_user.training_posts
   end
 
   def show
