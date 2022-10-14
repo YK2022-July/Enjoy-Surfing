@@ -29,8 +29,6 @@ class Public::GoalsController < ApplicationController
     params.require(:goal).permit(
       :end_user_id,
       :goal,
-      #:immediate_goals_attributes,
-      #:today_goals_attributes,
       immediate_goals_attributes: [:end_user_id, :goal1, :goal2, :_destroy],
       today_goals_attributes: [:end_user_id, :training_post_id, :goal1, :goal2, :goal3, :_destroy]
       )
