@@ -43,4 +43,9 @@ Rails.application.routes.draw do
   patch 'training_posts/:id' => 'public/training_posts#update', as: 'training_posts_update'
   delete 'training_posts/:id' => 'public/training_posts#destroy', as: 'training_posts_destroy'
 
+  #目標設定機能用
+  scope module: :public do
+  resources :goals
+  end
+
 end
