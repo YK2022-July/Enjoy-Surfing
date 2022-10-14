@@ -6,7 +6,7 @@
   </div>
   <div class='row text-center'>
     <div class="col">
-      <%= form_with model: TrainingPost, method: :post do |training_post| %>
+      <%= form_with(model: TrainingPost, method: :post, local:true) do |training_post| %>
         <div>練習日</div>
         <div>
           <%= training_post.date_field :date %>

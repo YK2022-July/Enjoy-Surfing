@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_12_010648) do
+ActiveRecord::Schema.define(version: 2022_10_14_071425) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +74,33 @@ ActiveRecord::Schema.define(version: 2022_10_12_010648) do
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
 
+  create_table "goals", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.string "goal"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "immediate_goals", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.string "goal1"
+    t.string "goal2"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "goal_id"
+  end
+
+  create_table "today_goals", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.integer "training_post_id"
+    t.string "goal1"
+    t.string "goal2"
+    t.string "goal3"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "goal_id"
+  end
+
   create_table "training_posts", force: :cascade do |t|
     t.integer "end_user_id"
     t.integer "comment_id"
@@ -97,6 +124,7 @@ ActiveRecord::Schema.define(version: 2022_10_12_010648) do
     t.boolean "is_active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "goal_set_date"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

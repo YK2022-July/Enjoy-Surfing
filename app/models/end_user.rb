@@ -5,6 +5,9 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :training_posts, dependent: :destroy
+  has_many :goals, dependent: :destroy
+  has_many :immediate_goals, dependent: :destroy
+  has_many :today_goals, dependent: :destroy
 
   has_one_attached :user_image
 

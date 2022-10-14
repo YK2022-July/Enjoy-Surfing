@@ -1,6 +1,7 @@
 class TrainingPost < ApplicationRecord
 
   belongs_to :end_user
+  has_many   :today_goals, dependent: :destroy
   has_one_attached :post_image
 
   #投稿画像の取得メソッド
