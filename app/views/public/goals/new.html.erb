@@ -48,4 +48,7 @@
   </div>
   <%= goal.hidden_field :end_user_id, value: current_end_user.id %>
   <% end %>
+  <div>
+    <%= link_to "マイページに戻る", my_page_path(current_end_user.id) %>
+  </div>
 </div>
