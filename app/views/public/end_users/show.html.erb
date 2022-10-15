@@ -49,7 +49,26 @@
       <div><%= link_to "プロフィールを編集", end_user_edit_path %></div>
     </div>
     <div class="col-6">
-      <div>カラム2</div>
+      <div class="border border-5">
+        <ul>
+          <li><%= @goal.goal %></li>
+        </ul>
+        <ul>
+          <li><%= @immediate_goal.goal1 %></li>
+          <% if @immediate_goal.goal2 != "" %>
+            <li><%= @immediate_goal.goal2 %></li>
+          <% end %>
+        </ul>
+        <ul>
+          <li><%= @today_goal.goal1 %></li>
+          <% if @today_goal.goal2 != "" %>
+            <li><%= @today_goal.goal2 %></li>
+          <% end %>
+          <% if @today_goal.goal3 != "" %>
+            <li><%= @today_goal.goal3 %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
     <div class="btn-wrapper col-3">
       <div class="row">

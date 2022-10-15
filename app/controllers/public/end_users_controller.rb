@@ -1,6 +1,10 @@
 class Public::EndUsersController < ApplicationController
   def show
     @end_user = EndUser.find(params[:id])
+    @goal = Goal.find(@end_user.id)
+    @immediate_goal = ImmediateGoal.find(params[:id])
+    @today_goal = TodayGoal.find(params[:id])
+
   end
 
   def edit
