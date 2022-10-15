@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_14_071425) do
+ActiveRecord::Schema.define(version: 2022_10_15_022646) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,12 @@ ActiveRecord::Schema.define(version: 2022_10_14_071425) do
     t.integer "goal_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "today_goals", force: :cascade do |t|
     t.integer "end_user_id"
     t.integer "training_post_id"
@@ -127,6 +133,17 @@ ActiveRecord::Schema.define(version: 2022_10_14_071425) do
     t.date "goal_set_date"
   end
 
+  create_table "training_tag_relations", force: :cascade do |t|
+    t.integer "training_post_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_id"], name: "index_training_tag_relations_on_tag_id"
+    t.index ["training_post_id"], name: "index_training_tag_relations_on_training_post_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "training_tag_relations", "tags"
+  add_foreign_key "training_tag_relations", "training_posts"
 end

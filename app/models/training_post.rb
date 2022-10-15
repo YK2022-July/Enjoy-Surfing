@@ -2,6 +2,8 @@ class TrainingPost < ApplicationRecord
 
   belongs_to :end_user
   has_many   :today_goals, dependent: :destroy
+  has_many   :training_tag_relations, dependent: :destroy
+  has_many   :tags, through: :training_tag_relations, dependent: :destroy
   has_one_attached :post_image
 
   #投稿画像の取得メソッド

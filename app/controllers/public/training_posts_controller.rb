@@ -60,7 +60,8 @@ class Public::TrainingPostsController < ApplicationController
       :take_off,
       :goal,
       :post_image,
-      :is_active
+      :is_active,
+      {tag_ids: []}
     )
   end
 
