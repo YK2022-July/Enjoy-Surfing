@@ -1,10 +1,9 @@
 class Public::EndUsersController < ApplicationController
   def show
     @end_user = EndUser.find(params[:id])
-    @goal = Goal.find(@end_user.id)
-    @immediate_goal = ImmediateGoal.find(params[:id])
-    @today_goal = TodayGoal.find(params[:id])
-
+    @goal = Goal.where(end_user_id: @end_user.id).last
+    @immediate_goal = ImmediateGoal.where(end_user_id: @end_user.id).last
+    @today_goal = TodayGoal.where(end_user_id: @end_user.id).last
   end
 
   def edit
@@ -17,6 +16,7 @@ class Public::EndUsersController < ApplicationController
     redirect_to my_page_path(end_user.id)
   end
 
+  #退会処理後のview表示用
   def unsubscribe
   end
 

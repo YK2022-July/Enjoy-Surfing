@@ -51,23 +51,32 @@
     <div class="col-6">
       <div class="border border-5">
         <ul>
-          <li><%= @goal.goal %></li>
+          <li><%= @goal&.goal %></li>
         </ul>
         <ul>
-          <li><%= @immediate_goal.goal1 %></li>
-          <% if @immediate_goal.goal2 != "" %>
-            <li><%= @immediate_goal.goal2 %></li>
-          <% end %>
+          <li><%= @immediate_goal&.goal1 %></li>
         </ul>
+          <% if !@immediate_goal&.goal2.nil? %>
+          <% else %>
+          <ul>
+            <li><%= @immediate_goal&.goal2 %></li>
+          </ul>
+          <% end %>
         <ul>
-          <li><%= @today_goal.goal1 %></li>
-          <% if @today_goal.goal2 != "" %>
-            <li><%= @today_goal.goal2 %></li>
-          <% end %>
-          <% if @today_goal.goal3 != "" %>
-            <li><%= @today_goal.goal3 %></li>
-          <% end %>
+          <li><%= @today_goal&.goal1 %></li>
         </ul>
+          <% if !@today_goal&.goal2.nil? %>
+          <% else %>
+          <ul>
+            <li><%= @today_goal&.goal2 %></li>
+          </ul>
+          <% end %>
+          <% if !@today_goal&.goal3.nil? %>
+          <% else %>
+          <ul>
+            <li><%= @today_goal&.goal3 %></li>
+          </ul>
+          <% end %>
       </div>
     </div>
     <div class="btn-wrapper col-3">
