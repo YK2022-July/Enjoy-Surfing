@@ -48,4 +48,7 @@ Rails.application.routes.draw do
   resources :goals
   end
 
+  #キーワード検索用
+  get 'search' => 'public/searches#search'
+
 end
