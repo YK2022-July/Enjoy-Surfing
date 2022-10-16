@@ -14,7 +14,7 @@
     </div>
     <% end %>
   </div>
-  <div class="row text-center">
+  <div class="row text-center py-2">
     <div class="col">
       <%= image_tag @training_post.get_post_image(400,300) %>
     </div>
@@ -89,6 +89,13 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="row text-center justify-content-center pb-3">
+    <div class="col-4 pr-0">
+       <% @training_post.tags.each do |tag| %>
+        <span class="bg-secondary text-white">#<%= tag.name %></span>
+      <% end %>
     </div>
   </div>
   <% if @training_post.end_user == current_end_user %>

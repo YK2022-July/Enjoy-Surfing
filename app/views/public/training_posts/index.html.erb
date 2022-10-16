@@ -4,16 +4,38 @@
       <h3>みんなの記録</h3>
     </div>
   </div>
-  <div class="row text-center">
-    <% @training_posts.each do |training_post| %>
-      <%= link_to training_posts_show_path(training_post.id), class: "text-decoration-none" do %>
-        <div class="col p-4">
-          <div><%= image_tag training_post.get_post_image(100,100) %></div>
-          <div><%= training_post.point %></div>
-          <div><%= training_post.condition %></div>
-          <div><%= training_post.size %></div>
-        </div>
-      <% end %>
+  <div class="row  d-flex">
+    <div class="row d-flex flex-column">
+    <div class="col search_form">
+    <%= form_with url: search_path, local: true, method: :get do |f| %>
+      <div class="py-1"><%= f.text_field :word %></div>
+      <div class="pb-3"><%= f.submit "キーワード検索" %></div>
     <% end %>
+    </div>
+    <div class="col search_tag">
+      <%= form_with url: training_posts_index_path, local: true, method: :get do %>
+        <% Tag.all.each do |tag| %>
+          <li class="list-unstyled">
+            <%= check_box :tag_ids, tag.name %> #<%= tag.name %>
+          </li>
+        <% end %>
+        <%= submit_tag 'タグ検索' %>
+      <% end %>
+    </div>
+    </div>
+
+    <div class="col-9 text-center d-flex">
+      <% @training_posts.each do |training_post| %>
+        <%= link_to training_posts_show_path(training_post.id), class: "text-decoration-none" do %>
+          <div class="p-4">
+            <div><%= image_tag training_post.get_post_image(100,100) %></div>
+            <div><%= training_post.point %></div>
+            <div><%= training_post.condition %></div>
+            <div><%= training_post.size %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    </div>
   </div>
 </div>

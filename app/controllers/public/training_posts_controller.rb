@@ -12,6 +12,17 @@ class Public::TrainingPostsController < ApplicationController
 
   def index
     @training_posts = TrainingPost.active.order(date: "DESC")
+
+    #タグ検索用（AND検索）
+    if params[:tag_ids]
+      @training_posts = []
+      params[:tag_ids].each do |key, value|
+        if value == "1"
+          tags = Tag.find_by(name: key).training_posts
+          @training_posts = (@training_posts.empty? ? tags : @training_posts & tags).active.order(date: "DESC")
+        end
+      end
+    end
   end
 
   def my_posts
@@ -39,6 +50,7 @@ class Public::TrainingPostsController < ApplicationController
     @training_post.destroy
     redirect_to training_posts_index_path
   end
+
 
   private
 

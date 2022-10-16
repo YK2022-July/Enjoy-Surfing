@@ -69,6 +69,16 @@
         <div>
           <%= training_post.text_area :body %>
         </div>
+        <div>
+          <%= training_post.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+            <div class='form-check'>
+              <%= tag.label class: 'form-check-label' do %>
+                <%= tag.check_box class: 'form-check-input' %>
+                <%= tag.text %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
         <div>公開設定</div>
         <span class="p-2">
           <%= training_post.label :is_active, "公開", value: true %>
