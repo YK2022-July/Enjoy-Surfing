@@ -38,10 +38,18 @@ Rails.application.routes.draw do
   post 'training_posts' => 'public/training_posts#create'
   get 'training_posts/index' => 'public/training_posts#index', as: 'training_posts_index'
   get 'training_posts/:id/my_posts' => 'public/training_posts#my_posts', as: 'training_posts_my_posts'
-  get 'training_posts/:id/show' => 'public/training_posts#show', as: 'training_posts_show'
+  #get 'training_posts/:id/show' => 'public/training_posts#show', as: 'training_posts_show'
+  scope module: :public do
+    resources :training_posts, only: [:show] do
+      resource :fights, only: [:create, :destroy]
+    end
+  end
   get 'training_posts/:id/edit' => 'public/training_posts#edit', as: 'training_posts_edit'
   patch 'training_posts/:id' => 'public/training_posts#update', as: 'training_posts_update'
   delete 'training_posts/:id' => 'public/training_posts#destroy', as: 'training_posts_destroy'
+
+  #post 'training_posts/:training_post_id/show/fights/:id' => 'public/fights#create', as: 'training_posts_fight'
+  #delete 'training_posts/:training_post_id/show/fights/' => 'public/fights#destroy'
 
   #目標設定機能用
   scope module: :public do

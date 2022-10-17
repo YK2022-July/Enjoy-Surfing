@@ -1,0 +1,13 @@
+<% if training_post.fight_pushed_by?(current_end_user) %>
+  <%= link_to training_post_fights_path(training_post), method: :delete, remote: true do %>
+    <div style="color: #dc3545;">
+    ♥<%= training_post.fights.count %>
+    </div>
+  <% end %>
+<% else %>
+  <%= link_to training_post_fights_path(training_post), method: :post, remote: true do %>
+    <div style="color: #007bff;">
+    ♥<%= training_post.fights.count %>
+    </div>
+  <% end %>
+<% end %>
