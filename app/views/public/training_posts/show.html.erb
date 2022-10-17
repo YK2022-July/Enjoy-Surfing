@@ -98,7 +98,51 @@
       <% end %>
     </div>
   </div>
-  <% if @training_post.end_user == current_end_user %>
+  <% if @training_post.end_user != current_end_user %>
+  <div class="row text-center justify-content-center pb-3">
+    <div id="fights_<%= @training_post.id %>">
+      <%= render 'public/fights/fight', training_post: @training_post %>
+    </div>
+  </div>
+  <% else %>
+  <div class="row text-center justify-content-center pb-3">
+    <div class="col-4">
+      <!-- 応援ボタン -->
+      <button class="btn" data-toggle="modal" data-target="#fight-pushed-user">
+        ♥<%= @training_post.fights.count %>
+      </button>
+      <!-- 応援ユーザー表示ポップアップ -->
+      <div class="modal fade" id="fight-pushed-user" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-header-col mx-auto">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                  <%= @end_user.name %>さんを応援しているユーザー
+                </h5>
+              </div>
+              <div class="modal-header-col">
+                <button type="button" class="close button-outline" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <% @fights.each do |fight| %>
+              <div>
+                <%= image_tag fight.end_user.get_user_image(40,40) %>
+                <%= fight.end_user.name %>
+              </div>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row justify-content-center">
     <div class="col-2 btn btn-success">
     <%= link_to "記録を編集する", training_posts_edit_path(@training_post) %>

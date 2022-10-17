@@ -4,6 +4,7 @@ class TrainingPost < ApplicationRecord
   has_many   :today_goals, dependent: :destroy
   has_many   :training_tag_relations, dependent: :destroy
   has_many   :tags, through: :training_tag_relations, dependent: :destroy
+  has_many   :fights, dependent: :destroy
   has_one_attached :post_image
 
   #投稿画像の取得メソッド
@@ -18,4 +19,9 @@ class TrainingPost < ApplicationRecord
   #投稿の公開・非公開の条件
   scope :active, -> {where(is_active: true)}
   scope :inactive, -> {where(is_active: false)}
+
+  #リアクション機能
+  def fight_pushed_by?(end_user)
+    fights.exists?(end_user_id: end_user.id)
+  end
 end
