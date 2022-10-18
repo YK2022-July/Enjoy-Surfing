@@ -5,6 +5,7 @@ class TrainingPost < ApplicationRecord
   has_many   :training_tag_relations, dependent: :destroy
   has_many   :tags, through: :training_tag_relations, dependent: :destroy
   has_many   :fights, dependent: :destroy
+  has_many   :training_post_comments, dependent: :destroy
   has_one_attached :post_image
 
   #投稿画像の取得メソッド

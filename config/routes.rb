@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   #get 'training_posts/:id/show' => 'public/training_posts#show', as: 'training_posts_show'
   scope module: :public do
     resources :training_posts, only: [:show] do
-      resource :fights, only: [:create, :destroy]
+      resource  :fights, only: [:create, :destroy]
+      resources :training_post_comments, only: [:create, :destroy]
     end
   end
   get 'training_posts/:id/edit' => 'public/training_posts#edit', as: 'training_posts_edit'

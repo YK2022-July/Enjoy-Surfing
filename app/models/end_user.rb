@@ -9,7 +9,7 @@ class EndUser < ApplicationRecord
   has_many :immediate_goals, dependent: :destroy
   has_many :today_goals, dependent: :destroy
   has_many :fights, dependent: :destroy
-
+  has_many :training_post_comments, dependent: :destroy
   has_one_attached :user_image
 
   #プロフィール画像の取得メソッド
