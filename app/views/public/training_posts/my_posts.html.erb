@@ -6,7 +6,7 @@
   </div>
   <div class="row text-center d-flex flex-wrap">
     <% @training_posts.each do |training_post| %>
-      <%= link_to training_posts_show_path(training_post.id), class: "text-decoration-none" do %>
+      <%= link_to training_posts_path(training_post.id), class: "text-decoration-none" do %>
         <div class="col p-4">
           <div><%= image_tag training_post.get_post_image(100,100) %></div>
           <div><%= training_post.point %></div>

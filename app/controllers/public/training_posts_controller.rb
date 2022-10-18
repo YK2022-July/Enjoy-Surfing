@@ -33,6 +33,7 @@ class Public::TrainingPostsController < ApplicationController
     @training_post = TrainingPost.find(params[:id])
     @end_user = @training_post.end_user
     @fights = Fight.where(training_post_id: @training_post.id)
+    @training_post_comment = TrainingPostComment.new
   end
 
   def edit
