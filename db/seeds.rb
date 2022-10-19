@@ -23,3 +23,8 @@ Tag.create([
   { name: 'ウィメン' },
   { name: 'シニアウィメン' }
   ])
+
+Admin.create!(
+   email: 'admin@test.com',
+   password: 'adminadmin',
+)

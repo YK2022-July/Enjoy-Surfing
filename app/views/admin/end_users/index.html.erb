@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col">
+      <h3>会員一覧</h3>
+    </div>
+  </div>
+  <div class="row  d-flex">
+    <div class="row d-flex flex-column">
+      <div class="col search_form">
+        <%= form_with url: search_path, local: true, method: :get do |f| %>
+          <div class="py-1"><%= f.text_field :word %></div>
+          <div class="pb-3"><%= f.submit "ユーザーID検索" %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th scope="col">ユーザーID</th>
+          <th scope="col">ユーザー名</th>
+          <th scope="col">登録日</th>
+          <th scope="col">最終ログイン日時</th>
+          <th scope="col">利用状況</th>
+          <th scope="col">詳細</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @end_users.each do |end_user| %>
+        <tr>
+          <td></td>
+          <td><%= end_user.id %></td>
+          <td><%= end_user.name %></td>
+          <td><%= end_user.created_at %></td>
+          <td><%= end_user.last_sign_in_at %></td>
+          <% if end_user.is_suspended == true %>
+            <td>利用停止中</td>
+          <% else %>
+            <td>利用中</td>
+          <% end %>
+          <td><%= link_to "詳細情報", edit_admin_end_user_path(end_user.id) %></td>
+          <td></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

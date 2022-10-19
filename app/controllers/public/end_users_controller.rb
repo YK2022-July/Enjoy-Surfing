@@ -1,4 +1,8 @@
 class Public::EndUsersController < ApplicationController
+  def index
+    @end_users = EndUser.all
+  end
+
   def show
     @end_user = EndUser.find(params[:id])
     @goal = Goal.where(end_user_id: @end_user.id).last
@@ -42,7 +46,7 @@ class Public::EndUsersController < ApplicationController
       :history,
       :introduction,
       :is_deleted,
-      :end_user_image
+      :end_user_image,
     )
   end
 end

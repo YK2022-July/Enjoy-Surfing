@@ -2,7 +2,8 @@ class EndUser < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :trackable
 
   has_many :training_posts, dependent: :destroy
   has_many :goals, dependent: :destroy
@@ -33,4 +34,8 @@ class EndUser < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
+
+  #ユーザーの利用停止・再開の条件（管理者）
+  scope :suspend, -> {where(is_suspended: true)}
+  scope :resume, -> {where(is_suspended: false)}
 end
