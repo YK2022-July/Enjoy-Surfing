@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  #Top/Aboutページ
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about', as: 'about'
 
@@ -59,5 +60,18 @@ Rails.application.routes.draw do
 
   #キーワード検索用
   get 'search' => 'public/searches#search'
+
+  #管理者Topページ
+  namespace :admin do
+    get '' => 'homes#top',as:'top'
+    resources :end_users, only: [:index, :edit, :update, :destroy] do
+    end
+  end
+
+  #管理者用
+  #scope module: :admin do
+    #resources :end_users, only: [:index, :edit, :update, :destroy] do
+    #end
+  #end
 
 end

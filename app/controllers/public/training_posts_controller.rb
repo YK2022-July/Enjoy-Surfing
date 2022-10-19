@@ -44,7 +44,6 @@ class Public::TrainingPostsController < ApplicationController
     training_post = TrainingPost.find(params[:id])
     training_post.update(training_post_params)
     redirect_to training_posts_show_path(training_post.id)
-
   end
 
   def destroy
