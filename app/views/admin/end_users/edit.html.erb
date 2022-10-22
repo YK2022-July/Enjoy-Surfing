@@ -23,7 +23,7 @@
         <tr>
           <th scope="row">最終ログイン日時</th>
           <td><%= @end_user.last_sign_in_at&.strftime("%Y-%m-%d %H:%M:%S") %></td>
-         </tr>
+        </tr>
         <tr>
           <th scope="row">利用状況</th>
            <% if @end_user.is_deleted == true %>
