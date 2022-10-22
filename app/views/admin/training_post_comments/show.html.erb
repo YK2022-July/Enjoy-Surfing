@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col">
+      <h3>投稿（コメント）詳細</h3>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="row mx-auto d-flex flex-column">
+      <div class="col">
+      <table class="table table-bordered text-left">
+        <tr>
+          <th scope="row">コメントID</th>
+          <td><%= @comment.id %></td>
+        </tr>
+        <tr>
+          <th scope="row">ユーザー名</th>
+          <td><%= @comment.end_user.name %></td>
+        </tr>
+        <tr>
+          <th scope="row">投稿日時</th>
+          <td><%= @comment.created_at&.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        </tr>
+        <tr>
+          <th scope="row">コメント内容</th>
+          <td><%= @comment.comment %></td>
+        </tr>
+      </table>
+      </div>
+      <div class="col text-center">
+          <div>
+            <%= link_to "コメントを削除する", admin_training_post_comment_path(@comment), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

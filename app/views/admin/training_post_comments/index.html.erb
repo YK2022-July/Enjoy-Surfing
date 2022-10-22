@@ -33,7 +33,7 @@
           <td><%= comment.id %></td>
           <td><%= comment.end_user.name %></td>
           <td><%= comment.comment.truncate(30) %></td>
-          <td><%= link_to "詳細情報", admin_erase_path(comment.id), class:"btn btn-secondary btn-sm" %></td>
+          <td><%= link_to "詳細情報", admin_training_post_comment_path(comment.id), class:"btn btn-secondary btn-sm" %></td>
           <td></td>
         </tr>
         <% end %>

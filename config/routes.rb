@@ -67,8 +67,10 @@ Rails.application.routes.draw do
   #管理者Topページ
   namespace :admin do
     get '' => 'homes#top',as:'top'
-    get 'administrate' => 'training_post_comments#administrate'
-    get 'erase' => 'training_post_comments#erase'
+    #get 'administrate' => 'training_post_comments#administrate'
+    #get '/:id/erase' => 'training_post_comments#erase', as: 'erase'
+    resources :training_post_comments, only: [:index, :show, :destroy] do
+    end
     resources :end_users, only: [:index, :edit, :update, :destroy] do
     end
   end
