@@ -1,0 +1,100 @@
+<div class='container'>
+  <div class='row text-center'>
+    <div class="col">
+      <h1>トレーニングレポート</h1>
+    </div>
+  </div>
+  <div class='row text-center'>
+    <div class="col">
+      <%= form_with(model: @training_post, method: :post, local:true) do |training_post| %>
+        <div>練習日</div>
+        <div>
+          <%= training_post.date_field :date %>
+        </div>
+        <div>練習時間</div>
+        <div>
+          開始<%= training_post.time_field :start_time %>
+          終了<%= training_post.time_field :end_time %>
+        </div>
+        <div>ラウンド</div>
+        <div>
+          <%= training_post.text_field :round %>
+        </div>
+        <div>エリア</div>
+        <div>
+          <%#= training_post.text_field :area %>
+        </div>
+        <div>ポイント</div>
+        <div>
+          <%= training_post.text_field :point %>
+        </div>
+        <div>天気</div>
+        <div>
+          <%= training_post.text_field :weather %>
+        </div>
+        <div>風向き</div>
+        <div>
+          <%= training_post.text_field :wind%>
+        </div>
+        <div>コンディション</div>
+        <div>
+          <%= training_post.text_field :condition %>
+        </div>
+        <div>波サイズ</div>
+        <div>
+          <%= training_post.text_field :size %>
+        </div>
+        <div>人数</div>
+        <div>
+          <%= training_post.text_field :people %>
+        </div>
+        <div>使用ボード</div>
+        <div>
+          <%= training_post.text_field :board %>
+        </div>
+        <div>着用ウェットスーツ</div>
+        <div>
+          <%#= training_post.select :wetsuit [['トランクス'], ['ラッシュガード'], ['タッパー'], ['スプリング'], ['ショートジョン'], ['ロングジョン'], [''], ['ドライスーツ']], { include_blank: true, selected: 1 }, { id: "user_id", class: "user_class" } %>
+          <%= training_post.text_field :wetsuit %>
+        </div>
+        <div>テイクオフ回数</div>
+        <div>
+          <%= training_post.text_field :take_off %>
+        </div>
+        <div>画像選択</div>
+        <div>
+          <%= training_post.file_field :post_image, accept: "image/*" %>
+        </div>
+        <div>メモ</div>
+        <div>
+          <%= training_post.text_area :body %>
+        </div>
+        <div class='form-group'>
+          <%= training_post.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+            <div class='form-check'>
+              <%= tag.label class: 'form-check-label' do %>
+                <%= tag.check_box class: 'form-check-input' %>
+                <%= tag.text %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div>公開設定</div>
+        <span class="p-2">
+          <%= training_post.label :is_active, "公開", value: true %>
+          <%= training_post.radio_button :is_active, 'true' %>
+        </span>
+        <span class="p-2">
+          <%= training_post.label :is_active, "非公開", value: false %>
+          <%= training_post.radio_button :is_active,'false' %>
+        </span>
+        <div>
+          <%= training_post.submit '投稿' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <%= link_to "戻る", my_page_path(current_end_user.id) %>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col">
+      <h3>会員情報詳細</h3>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="row mx-auto d-flex flex-column">
+      <div class="col">
+      <table class="table table-bordered text-left">
+        <tr>
+          <th scope="row">ユーザーID</th>
+          <td><%= @end_user.id %></td>
+        </tr>
+        <tr>
+          <th scope="row">ユーザー名</th>
+          <td><%= @end_user.name %></td>
+        </tr>
+        <tr>
+          <th scope="row">登録日時</th>
+          <td><%= @end_user.created_at&.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        </tr>
+        <tr>
+          <th scope="row">最終ログイン日時</th>
+          <td><%= @end_user.last_sign_in_at&.strftime("%Y-%m-%d %H:%M:%S") %></td>
+         </tr>
+        <tr>
+          <th scope="row">利用状況</th>
+           <% if @end_user.is_deleted == true %>
+             <td class="text-secondary">退会済み</td>
+           <% elsif @end_user.is_suspended == true %>
+             <td class="text-danger">利用停止中</td>
+           <% else %>
+             <td class="text-success">利用中</td>
+           <% end %>
+        </tr>
+      </table>
+      </div>
+      <div class="col text-center">
+        <div class="py-1 bg-secondary text-light">利用設定</div>
+        <%= form_with(model: @end_user, url: admin_end_user_path(@end_user.id), method: :patch, local:true) do |end_user| %>
+          <div class="py-3">
+          <span class="p-2">
+            <%= end_user.label :is_suspended, "利用停止", value: true %>
+            <%= end_user.radio_button :is_suspended, 'true' %>
+          </span>
+          <span class="p-2">
+            <%= end_user.label :is_suspended, "利用再開", value: false %>
+            <%= end_user.radio_button :is_suspended,'false' %>
+          </span>
+          </div>
+          <div>
+            <%= end_user.submit '設定', class:"btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

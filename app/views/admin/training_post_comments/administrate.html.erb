@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col">
+      <h3>投稿（コメント）一覧</h3>
+    </div>
+  </div>
+  <div class="row  d-flex">
+    <div class="row d-flex flex-column">
+      <div class="col search_form">
+        <%= form_with url: search_path, local: true, method: :get do |f| %>
+          <div class="py-1"><%= f.text_field :word %></div>
+          <div class="pb-3"><%= f.submit "ユーザーID検索" %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th scope="col">コメントID</th>
+          <th scope="col">ユーザー名</th>
+          <th scope="col">コメント</th>
+          <th scope="col">詳細</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+        <tr>
+          <td></td>
+          <td><%= comment.id %></td>
+          <td><%= comment.end_user.name %></td>
+          <td><%= comment.comment.truncate(30) %></td>
+          <td><%= link_to "詳細情報", admin_erase_path(comment.id), class:"btn btn-secondary btn-sm" %></td>
+          <td></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

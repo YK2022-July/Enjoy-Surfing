@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col">
+      <h3><%= current_end_user.name %>さんの記録</h3>
+    </div>
+  </div>
+  <div class="row text-center d-flex flex-wrap">
+    <% @training_posts.each do |training_post| %>
+      <%= link_to training_posts_path(training_post.id), class: "text-decoration-none" do %>
+        <div class="col p-4">
+          <div><%= image_tag training_post.get_post_image(100,100) %></div>
+          <div><%= training_post.point %></div>
+          <div><%= training_post.condition %></div>
+          <div><%= training_post.size %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class='container'>
+  <div class='row text-center'>
+    <div class="col">
+      <h1><%= @end_user.name %>さんのマイページ</h1>
+    </div>
+  </div>
+  <div class='row'>
+    <div class="col-3">
+      <div>プロフィール</div>
+      <div class="py-2"><%= image_tag @end_user.get_user_image(100,100) %></div>
+      <div class="pb-3"><%= render "user_image" %></div>
+      <!--<div><%#= link_to "プロフィール画像を変更" %></div>-->
+      <div>ユーザーネーム</div>
+      <div>
+        <%= @end_user.name %>
+      </div>
+      <div>年齢</div>
+      <div>
+        <%= @end_user.age %>
+      </div>
+      <div>性別</div>
+      <div>
+        <%= @end_user.sex %>
+      </div>
+      <div>エリア</div>
+      <div>
+        <%= @end_user.area_id %>
+      </div>
+      <div>ホーム</div>
+      <div>
+        <%= @end_user.home %>
+      </div>
+      <div>種目</div>
+      <div>
+        <%= @end_user.type_id %>
+      </div>
+      <div>スタンス</div>
+      <div>
+        <%= @end_user.stance %>
+      </div>
+      <div>サーフィン歴</div>
+      <div>
+        <%= @end_user.history %>
+      </div>
+      <div>自己紹介</div>
+      <div>
+        <%= @end_user.introduction %>
+      </div>
+      <div><%= link_to "プロフィールを編集", end_user_edit_path %></div>
+    </div>
+    <div class="col-6">
+      <div class="border border-5">
+        <ul>
+          <li><%= @goal&.goal %></li>
+        </ul>
+        <ul>
+          <li><%= @immediate_goal&.goal1 %></li>
+        </ul>
+          <% if !@immediate_goal&.goal2.nil? %>
+          <% else %>
+          <ul>
+            <li><%= @immediate_goal&.goal2 %></li>
+          </ul>
+          <% end %>
+        <ul>
+          <li><%= @today_goal&.goal1 %></li>
+        </ul>
+          <% if !@today_goal&.goal2.nil? %>
+          <% else %>
+          <ul>
+            <li><%= @today_goal&.goal2 %></li>
+          </ul>
+          <% end %>
+          <% if !@today_goal&.goal3.nil? %>
+          <% else %>
+          <ul>
+            <li><%= @today_goal&.goal3 %></li>
+          </ul>
+          <% end %>
+      </div>
+    </div>
+    <div class="btn-wrapper col-3">
+      <div class="row">
+        <%= link_to "トレーニング目標を設定する", new_goal_path, class:"btn btn-warning btn-sm btn-block mb-3" %>
+      </div>
+      <div class="row">
+        <%= link_to "トレーニングを記録する",  training_posts_new_path, class:"btn btn-success btn-sm btn-block mb-3" %>
+      </div>
+      <div class="row">
+        <%= link_to "自分の記録を見る",  training_posts_my_posts_path, class:"btn btn-funky-moon btn-sm btn-block mb-3" %>
+      </div>
+    </div>
+  </div>
+</div>

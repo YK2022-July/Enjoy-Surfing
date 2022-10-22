@@ -1,0 +1,54 @@
+<div class='container'>
+  <div class='row text-center'>
+    <div class="col">
+      <h3>目標設定</h3>
+    </div>
+  </div>
+  <%= form_with model: @goal, local:true do |goal| %>
+  <div class='row text-center flex-column'>
+    <div class="col form-group">
+      <h4>大目標</h4>
+      <h6>あなたが目指す最終目標を設定しましょう！</h6>
+      <div>
+        <%= goal.text_field :goal, placeholder: "例） CT(チャンピオンシップツアー)出場！" %>
+      </div>
+    </div>
+    <div class="col form-group">
+      <h4>中目標</h4>
+      <h6>最終目標達成に向けた中間目標を設定しましょう！（2つまで）</h6>
+      <%= goal.fields_for :immediate_goals, @goal.immediate_goals.build do |immediate_goal| %>
+      <div>
+        <%= immediate_goal.text_field :goal1, placeholder: "例） ◯月◯日の全日本サーフィン選手権大会出場！" %>
+      </div>
+      <div>
+        <%= immediate_goal.text_field :goal2, placeholder: "例） ◯月◯日の支部予選突破！" %>
+      </div>
+      <%= immediate_goal.hidden_field :end_user_id, value: current_end_user.id %>
+      <% end %>
+    </div>
+    <div class="col form-group">
+      <h4>小目標</h4>
+      <h6>中間目標達成に向けた本日の目標（練習で意識すること）を設定しましょう！（3つまで）</h6>
+      <%= goal.fields_for :today_goals, @goal.today_goals.build do |today_goal| %>
+      <div>
+        <%= today_goal.text_field :goal1, placeholder: "例） コンペの1ヒート15分を意識して練習する" %>
+      </div>
+      <div>
+        <%= today_goal.text_field :goal2, placeholder: "例） パワーゾーンを意識する" %>
+      </div>
+      <div>
+        <%= today_goal.text_field :goal3, placeholder: "例） プランク30秒×10セット" %>
+      </div>
+      <%= today_goal.hidden_field :end_user_id, value: current_end_user.id %>
+      <% end %>
+    </div>
+    <div class="col form-group">
+      <%= goal.submit '設定' %>
+    </div>
+  </div>
+  <%= goal.hidden_field :end_user_id, value: current_end_user.id %>
+  <% end %>
+  <div>
+    <%= link_to "マイページに戻る", my_page_path(current_end_user.id) %>
+  </div>
+</div>
