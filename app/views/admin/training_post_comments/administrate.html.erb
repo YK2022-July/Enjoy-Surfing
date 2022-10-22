@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row text-center">
     <div class="col">
-      <h3>ユーザー一覧</h3>
+      <h3>投稿（コメント）一覧</h3>
     </div>
   </div>
   <div class="row  d-flex">
@@ -19,29 +19,21 @@
       <thead>
         <tr>
           <th></th>
-          <th scope="col">ユーザーID</th>
+          <th scope="col">コメントID</th>
           <th scope="col">ユーザー名</th>
-          <th scope="col">登録日</th>
-          <th scope="col">最終ログイン日時</th>
-          <th scope="col">利用状況</th>
+          <th scope="col">コメント</th>
           <th scope="col">詳細</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <% @end_users.each do |end_user| %>
+        <% @comments.each do |comment| %>
         <tr>
           <td></td>
-          <td><%= end_user.id %></td>
-          <td><%= end_user.name %></td>
-          <td><%= end_user.created_at&.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          <td><%= end_user.last_sign_in_at&.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          <% if end_user.is_suspended == true %>
-            <td class="text-danger">利用停止中</td>
-          <% else %>
-            <td class="text-success">利用中</td>
-          <% end %>
-          <td><%= link_to "詳細情報", edit_admin_end_user_path(end_user.id), class:"btn btn-secondary btn-sm" %></td>
+          <td><%= comment.id %></td>
+          <td><%= comment.end_user.name %></td>
+          <td><%= comment.comment.truncate(30) %></td>
+          <td><%= link_to "詳細情報", admin_erase_path(comment.id), class:"btn btn-secondary btn-sm" %></td>
           <td></td>
         </tr>
         <% end %>
