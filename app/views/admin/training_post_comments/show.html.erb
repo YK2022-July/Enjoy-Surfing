@@ -17,12 +17,12 @@
           <td><%= @comment.end_user.name %></td>
         </tr>
         <tr>
-          <th scope="row">投稿日時</th>
+          <th scope="row"=>投稿日時</th>
           <td><%= @comment.created_at&.strftime("%Y-%m-%d %H:%M:%S") %></td>
         </tr>
         <tr>
           <th scope="row">コメント内容</th>
-          <td><%= @comment.comment %></td>
+          <td class="text-break"><%= @comment.comment %></td>
         </tr>
       </table>
       </div>
