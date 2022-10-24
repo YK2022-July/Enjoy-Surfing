@@ -39,7 +39,7 @@
       <div class="col text-center">
         <div class="py-1 bg-secondary text-light">利用設定</div>
         <%= form_with(model: @end_user, url: admin_end_user_path(@end_user.id), method: :patch, local:true) do |end_user| %>
-          <div class="py-3">
+          <div class="py-1 border">
           <span class="p-2">
             <%= end_user.label :is_suspended, "利用停止", value: true %>
             <%= end_user.radio_button :is_suspended, 'true' %>
@@ -49,7 +49,7 @@
             <%= end_user.radio_button :is_suspended,'false' %>
           </span>
           </div>
-          <div>
+          <div class="pt-3">
             <%= end_user.submit '設定', class:"btn btn-danger" %>
           </div>
         <% end %>
