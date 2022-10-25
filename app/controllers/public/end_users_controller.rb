@@ -1,4 +1,11 @@
 class Public::EndUsersController < ApplicationController
+  def create
+    @user_image = EndUser.new(end_user_params)
+    @user_image.id = current_end_user.id
+    @user_image.save
+    redirect_to request.referer
+  end
+
   def index
     @end_users = EndUser.all
   end
@@ -8,6 +15,7 @@ class Public::EndUsersController < ApplicationController
     @goal = Goal.where(end_user_id: @end_user.id).last
     @immediate_goal = ImmediateGoal.where(end_user_id: @end_user.id).last
     @today_goal = TodayGoal.where(end_user_id: @end_user.id).last
+    @user_image = EndUser.new
   end
 
   def edit
@@ -46,7 +54,7 @@ class Public::EndUsersController < ApplicationController
       :history,
       :introduction,
       :is_deleted,
-      :end_user_image,
+      :user_image,
     )
   end
 end
