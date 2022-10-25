@@ -7,6 +7,10 @@
   <div class='row text-center'>
     <div class="col">
       <%= form_with(model: @end_user, url: end_user_update_path(@end_user.id), method: :patch, local:true) do |end_user| %>
+        <div>プロフィール画像</div>
+        <div>
+          <%= end_user.file_field :user_image, accept: "image/*" %>
+        </div>
         <div>ニックネーム</div>
         <div>
           <%= end_user.text_field :name %>

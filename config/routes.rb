@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   #利用者ページ
   get 'end_users/:id/my_page' => 'public/end_users#show', as: 'my_page'
+  post 'end_users/:id/my_page' => 'public/end_users#create'
   get 'end_users/:id/edit' => 'public/end_users#edit', as: 'end_user_edit'
   patch 'end_users/:id' => 'public/end_users#update', as: 'end_user_update'
   #resources :end_users, only: [:edit]
