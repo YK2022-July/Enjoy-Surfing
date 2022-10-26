@@ -1,7 +1,7 @@
 <div class='container'>
   <div class='row text-center'>
-    <div class="col">
-      <h1>プロフィール編集</h1>
+    <div class="col pt-2 pb-4">
+      <h1 class="font-weight-bold">プロフィール編集</h1>
     </div>
   </div>
   <div class='row text-center'>
@@ -17,17 +17,17 @@
         </div>
         <div>年齢</div>
         <div>
-          <%= end_user.text_field :age %>
+          <%= end_user.select :age, [['10歳未満'], ['10代'], ['20代'], ['30代'], ['40代'], ['50代'], ['60歳以上']], { include_blank: true, selected: current_end_user.age } %>
         </div>
         <div>性別</div>
         <div>
-          <%= end_user.text_field :sex %>
+          <%= end_user.select :sex, [['男性'], ['女性']], { include_blank: true, selected: current_end_user.sex } %>
         </div>
         <div>エリア</div>
         <div>
           <%= end_user.text_field :area_id %>
         </div>
-        <div>ホーム</div>
+        <div>ホームポイント</div>
         <div>
           <%= end_user.text_field :home %>
         </div>
@@ -37,7 +37,7 @@
         </div>
         <div>スタンス</div>
         <div>
-          <%= end_user.text_field :stance %>
+          <%= end_user.select :stance, [['レギュラー'], ['グーフィー']], { include_blank: true, selected: current_end_user.stance } %>
         </div>
         <div>サーフィン歴</div>
         <div>
@@ -45,7 +45,7 @@
         </div>
         <div>自己紹介</div>
         <div>
-          <%= end_user.text_area :introduction %>
+          <%= end_user.text_area :introduction, size: "40x5" %>
         </div>
         <div>
           <%= end_user.submit '更新' %>
