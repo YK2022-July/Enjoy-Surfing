@@ -97,14 +97,23 @@
           最近のコメント
         </div>
         <div>
-        <%# if @trainig_post == current_end_user.id %>
-          <%# if @comment.training_post_id == @trainig_post %>
-            <%# @comment.each do |end_user| %>
-              <%#= end_user.user_image %>
-              <%#= end_user.name %>
-            <%# end %>
-          <%# end %>
-        <%# end %>
+        <% @training_posts.each do |training_post| %>
+          <% training_post.training_post_comments.order(created_at: "DESC").each_with_index do |comment, count| %>
+          <% break if count == 3 %>
+          <div class="pt-2">
+            <div>
+              <span><%= image_tag comment.end_user.get_user_image(50,50) %></span>
+              <span class="font-weight-bold"><%= comment.end_user.name %></span>
+              さん
+            </div>
+            <div class="row">
+              <span class="col-9"><%= comment.comment.truncate(23) %></span>
+              <span class="col-3 ml-auto"><%= comment.created_at.strftime("%Y-%m-%d") %></span>
+            </div>
+            <div class="pt-2 w-100 border-bottom"></div>
+          </div>
+          <% end %>
+        <% end %>
         </div>
       </div>
     </div>
