@@ -18,11 +18,11 @@ class Public::EndUsersController < ApplicationController
     @user_image = EndUser.new
     #@trainig_post = TrainingPost.where(end_user_id: @end_user.id)
     #@comment = TrainingPostComment.find(trainig_post_id: [:trainig_post_id])
-
   end
 
   def edit
     @end_user = EndUser.find(params[:id])
+    @areas = Area.all
   end
 
   def update
@@ -47,8 +47,8 @@ class Public::EndUsersController < ApplicationController
   private
   def end_user_params
     params.require(:end_user).permit(
-      :area_id,
-      :type_id,
+      :area,
+      :type_name,
       :name,
       :age,
       :sex,

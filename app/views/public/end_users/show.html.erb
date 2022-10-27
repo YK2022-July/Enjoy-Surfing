@@ -22,15 +22,15 @@
       </div>
       <div class="font-weight-bold font-italic text-black-50 bg-light">エリア</div>
       <div class="p-2">
-        <%= @end_user.area_id %>
+        <%= @end_user.area %>
       </div>
       <div class="font-weight-bold font-italic text-black-50 bg-light">ホームポイント</div>
       <div class="p-2">
         <%= @end_user.home %>
       </div>
-      <div class="font-weight-bold font-italic text-black-50 bg-light">種目</div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">メイン種目</div>
       <div class="p-2">
-        <%= @end_user.type_id %>
+        <%= @end_user.type_name %>
       </div>
       <div class="font-weight-bold font-italic text-black-50 bg-light">スタンス</div>
       <div class="p-2">
@@ -108,16 +108,23 @@
         </div>
       </div>
     </div>
-    <div class="btn-wrapper col-3">
-      <div class="row text-center d-flex flex-column">
-        <div class="col w-100">
-          <%= link_to "目標を設定する", new_goal_path, class:"btn btn-orange-gradient btn-lg btn-block mb-3" %>
-        </div>
-        <div class="col w-100">
-          <%= link_to "トレーニングを記録する",  training_posts_new_path, class:"btn btn-blue-gradient btn-lg btn-block mb-3" %>
-        </div>
-        <div class="col w-100">
-          <%= link_to "自分の記録を見る",  training_posts_my_posts_path, class:"btn btn-pink-gradient btn-lg btn-block mb-3" %>
+    <div class="col-3">
+      <div class="d-flex align-items-center justify-content-center flex-column w-100 h-50 bg-secondary py-5 text-light">
+        <h2>New Contens</h2>
+        <h2>Coming Soon...</h2>
+      </div>
+      <div class="btn-wrapper pt-5">
+      <h3 class="font-weight-bold bg-light">Menu</h3>
+        <div class="row text-center d-flex flex-column pt-3">
+          <div class="col w-100">
+            <%= link_to "目標を設定する", new_goal_path, class:"btn btn-orange-gradient btn-block mb-3" %>
+          </div>
+          <div class="col w-100">
+            <%= link_to "トレーニングを記録する",  training_posts_new_path, class:"btn btn-blue-gradient btn-block mb-3" %>
+          </div>
+          <div class="col w-100">
+            <%= link_to "自分の記録を見る",  training_posts_my_posts_path, class:"btn btn-pink-gradient btn-block mb-3" %>
+          </div>
         </div>
       </div>
     </div>
