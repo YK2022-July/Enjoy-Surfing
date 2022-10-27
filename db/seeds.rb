@@ -24,7 +24,32 @@ Tag.create([
   { name: 'シニアウィメン' }
   ])
 
-Admin.create!(
+Admin.create(
    email: 'admin@test.com',
    password: 'adminadmin',
 )
+
+Area.create([
+  { name: '北海道' },
+  { name: '東北（太平洋）' },
+  { name: '東北（日本海）' },
+  { name: '北陸' },
+  { name: '茨城' },
+  { name: '千葉北' },
+  { name: '千葉南' },
+  { name: '湘南' },
+  { name: '西湘' },
+  { name: '伊豆' },
+  { name: '静岡' },
+  { name: '伊良湖' },
+  { name: '伊勢志摩' },
+  { name: '和歌山' },
+  { name: '近畿・中国（日本海）' },
+  { name: '四国' },
+  { name: '宮崎' },
+  { name: '九州' },
+  { name: '沖縄' },
+  { name: '離島' },
+  { name: '海外' },
+  { name: '秘密' }
+  ])

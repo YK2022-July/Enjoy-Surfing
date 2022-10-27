@@ -17,27 +17,27 @@
         </div>
         <div>年齢</div>
         <div>
-          <%= end_user.select :age, [['10歳未満'], ['10代'], ['20代'], ['30代'], ['40代'], ['50代'], ['60歳以上']], { include_blank: true, selected: current_end_user.age } %>
+          <%= end_user.select :age, [['10歳未満'], ['10代'], ['20代'], ['30代'], ['40代'], ['50代'], ['60歳以上']], { include_blank: '--年齢を選択してください--', selected: current_end_user.age } %>
         </div>
         <div>性別</div>
         <div>
-          <%= end_user.select :sex, [['男性'], ['女性']], { include_blank: true, selected: current_end_user.sex } %>
+          <%= end_user.select :sex, [['男性'], ['女性']], { include_blank: '--性別を選択してください--', selected: current_end_user.sex } %>
         </div>
         <div>エリア</div>
         <div>
-          <%= end_user.text_field :area_id %>
+          <%= end_user.collection_select(:area, @areas, :name, :name, include_blank: '--エリアを選択してください--' ) %>
         </div>
         <div>ホームポイント</div>
         <div>
           <%= end_user.text_field :home %>
         </div>
-        <div>種目</div>
+        <div>メイン種目</div>
         <div>
-          <%= end_user.text_field :type_id %>
+          <%= end_user.select :type_name, [['ショートボード'], ['ロングボード'], ['ボディボード']], { include_blank: '--種目を選択してください--', selected: current_end_user.type_name } %>
         </div>
         <div>スタンス</div>
         <div>
-          <%= end_user.select :stance, [['レギュラー'], ['グーフィー']], { include_blank: true, selected: current_end_user.stance } %>
+          <%= end_user.select :stance, [['レギュラー'], ['グーフィー']], { include_blank: '--スタンスを選択してください--', selected: current_end_user.stance } %>
         </div>
         <div>サーフィン歴</div>
         <div>
