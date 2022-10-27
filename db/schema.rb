@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_27_022708) do
+ActiveRecord::Schema.define(version: 2022_10_27_062952) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2022_10_27_022708) do
     t.integer "end_user_id"
     t.integer "comment_id"
     t.integer "fight_id"
-    t.string "title"
+    t.string "area"
     t.text "body"
     t.date "date"
     t.time "start_time"
@@ -169,6 +169,12 @@ ActiveRecord::Schema.define(version: 2022_10_27_022708) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tag_id"], name: "index_training_tag_relations_on_tag_id"
     t.index ["training_post_id"], name: "index_training_tag_relations_on_training_post_id"
+  end
+
+  create_table "wetsuits", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

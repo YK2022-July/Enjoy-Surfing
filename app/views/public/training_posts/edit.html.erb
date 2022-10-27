@@ -22,7 +22,7 @@
         </div>
         <div>エリア</div>
         <div>
-          <%#= training_post.text_field :area %>
+          <%= training_post.collection_select(:area, @areas, :name, :name, include_blank: '--選択してください--' ) %>
         </div>
         <div>ポイント</div>
         <div>
@@ -65,7 +65,7 @@
         <div>
           <%#= training_post.file_field :post_image, accept: "image/*" %>
         </div>
-        <div>メモ</div>
+        <div>NOTE</div>
         <div>
           <%= training_post.text_area :body %>
         </div>

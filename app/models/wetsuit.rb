@@ -1,0 +1,2 @@
+class Wetsuit < ApplicationRecord
+end
