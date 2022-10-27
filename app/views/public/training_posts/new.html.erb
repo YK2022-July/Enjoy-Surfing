@@ -1,7 +1,7 @@
 <div class='container'>
   <div class='row text-center'>
-    <div class="col">
-      <h1>トレーニングレポート</h1>
+    <div class="col pt-2 pb-4">
+      <h1 class="font-weight-bold">トレーニングレポート</h1>
     </div>
   </div>
   <div class='row text-center'>
@@ -22,7 +22,7 @@
         </div>
         <div>エリア</div>
         <div>
-          <%#= training_post.text_field :area %>
+          <%= training_post.collection_select(:area, @areas, :name, :name, include_blank: '--選択してください--' ) %>
         </div>
         <div>ポイント</div>
         <div>
@@ -54,8 +54,7 @@
         </div>
         <div>着用ウェットスーツ</div>
         <div>
-          <%#= training_post.select :wetsuit [['トランクス'], ['ラッシュガード'], ['タッパー'], ['スプリング'], ['ショートジョン'], ['ロングジョン'], [''], ['ドライスーツ']], { include_blank: true, selected: 1 }, { id: "user_id", class: "user_class" } %>
-          <%= training_post.text_field :wetsuit %>
+          <%= training_post.collection_select(:wetsuit, @wetsuits, :name, :name, include_blank: '--選択してください--') %>
         </div>
         <div>テイクオフ回数</div>
         <div>
@@ -65,9 +64,9 @@
         <div>
           <%= training_post.file_field :post_image, accept: "image/*" %>
         </div>
-        <div>メモ</div>
+        <div>NOTE</div>
         <div>
-          <%= training_post.text_area :body %>
+          <%= training_post.text_area :body, size: "50x10" %>
         </div>
         <div class='form-group'>
           <%= training_post.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>

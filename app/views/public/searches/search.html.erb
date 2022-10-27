@@ -1,7 +1,7 @@
   <h2>検索結果 "<%= @word %>"</h2>
     <div class="col-9 text-center d-flex">
       <% @training_posts.each do |training_post| %>
-        <%= link_to training_posts_show_path(training_post.id), class: "text-decoration-none" do %>
+        <%= link_to training_post_path(training_post.id), class: "text-decoration-none" do %>
           <div class="p-4">
             <div><%= image_tag training_post.get_post_image(100,100) %></div>
             <div><%= training_post.point %></div>
@@ -11,4 +11,4 @@
         <% end %>
       <% end %>
     </div>
-    
+
