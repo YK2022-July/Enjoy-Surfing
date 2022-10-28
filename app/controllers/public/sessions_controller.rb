@@ -8,8 +8,7 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     end_user = EndUser.guest
     sign_in end_user
-    flash[:notice] = "ゲストユーザーでログインしました。"
-    redirect_to my_page_path(end_user)
+    redirect_to my_page_path(end_user), flash: {guest_user_notice: "ゲストユーザーでログインしました。"}
   end
 
   #退会ユーザーのログイン制限メソッド
