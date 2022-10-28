@@ -1,7 +1,11 @@
 <div class='container'>
   <div class='row text-center'>
     <div class="col pt-2 pb-4">
-      <h1 class="font-weight-bold"><%= @end_user.name %>さんのマイページ</h1>
+      <% if @end_user == current_end_user %>
+        <h1 class="font-weight-bold"><%= @end_user.name %>さんのマイページ</h1>
+      <% else %>
+        <h1 class="font-weight-bold"><%= @end_user.name %>さんを応援しましょう！</h1>
+      <% end %>
     </div>
   </div>
   <div class='row'>
@@ -44,9 +48,11 @@
       <div class="p-2">
         <%= @end_user.introduction %>
       </div>
-      <div class="font-size pt-3 pb-5">
-        <u><%= link_to "プロフィールを編集", end_user_edit_path %></u>
-      </div>
+      <% if @end_user == current_end_user %>
+        <div class="font-size pt-3 pb-5">
+          <u><%= link_to "プロフィールを編集", end_user_edit_path %></u>
+        </div>
+      <% end %>
     </div>
     <div class="col-6">
       <div class="border rounded-lg">
@@ -87,35 +93,62 @@
           </ul>
           <% end %>
       </div>
-      <div class="pt-3">
-        <div class="font-weight-bold font-italic text-black-50 bg-light">
-          最近のアクティビティ
-        </div>
-      </div>
-      <div class="pt-3">
-        <div class="font-weight-bold font-italic text-black-50 bg-light">
-          最近のコメント
-        </div>
-        <div>
-        <% @training_posts.each do |training_post| %>
-          <% training_post.training_post_comments.order(created_at: "DESC").each_with_index do |comment, count| %>
-          <% break if count == 3 %>
-          <div class="pt-2">
-            <div>
-              <span><%= image_tag comment.end_user.get_user_image(50,50) %></span>
-              <span class="font-weight-bold"><%= comment.end_user.name %></span>
-              さん
-            </div>
-            <div class="row">
-              <span class="col-9"><%= comment.comment.truncate(23) %></span>
-              <span class="col-3 ml-auto"><%= comment.created_at.strftime("%Y-%m-%d") %></span>
-            </div>
-            <div class="pt-2 w-100 border-bottom"></div>
+      <% if @end_user == current_end_user %>
+        <div class="pt-3">
+          <div class="font-weight-bold font-italic text-black-50 bg-light">
+            最近のアクティビティ
           </div>
+          <% @training_posts.each do |training_post| %>
+            <% training_post.fights.order(created_at: "DESC").each_with_index do |fight, count| %>
+            <% break if count == 3 %>
+            <div class="pt-2">
+              <div>
+                <%= link_to my_page_path(fight.end_user), class: "text-dark" do %>
+                  <span><%= image_tag fight.end_user.get_user_image(50,50) %></span>
+                  <span class="font-weight-bold"><%= fight.end_user.name %></span>
+                <% end %>
+                さん</br>
+                <span class="row">
+                <%= link_to training_post_path(training_post.id), class: "text-decoration-none text-dark" do %>
+                  <span class="col-9">が「応援」を押しました。</span>
+                <% end %>
+                  <span class="col-3 ml-auto"><%= fight.created_at.strftime("%Y-%m-%d") %></span>
+                </span>
+                <div class="pt-2 w-100 border-bottom"></div>
+              </div>
+            </div>
+            <% end %>
           <% end %>
-        <% end %>
         </div>
-      </div>
+        <div class="pt-3">
+          <div class="font-weight-bold font-italic text-black-50 bg-light">
+            最近のコメント
+          </div>
+          <div>
+          <% @training_posts.each do |training_post| %>
+            <% training_post.training_post_comments.order(created_at: "DESC").each_with_index do |comment, count| %>
+            <% break if count == 3 %>
+            <div class="pt-2">
+              <div>
+                <%= link_to my_page_path(comment.end_user), class: "text-dark" do %>
+                  <span><%= image_tag comment.end_user.get_user_image(50,50) %></span>
+                  <span class="font-weight-bold"><%= comment.end_user.name %></span>
+                <% end %>
+                さん
+              </div>
+              <div class="row">
+                <%= link_to training_post_path(training_post.id), class: "text-decoration-none text-dark" do %>
+                  <span class="col-9"><%= comment.comment.truncate(23) %></span>
+                <% end %>
+                <span class="col-3 ml-auto"><%= comment.created_at.strftime("%Y-%m-%d") %></span>
+             </div>
+              <div class="pt-2 w-100 border-bottom"></div>
+            </div>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="col-3">
       <div class="d-flex align-items-center justify-content-center flex-column w-100 h-50 bg-secondary py-5 text-light">
