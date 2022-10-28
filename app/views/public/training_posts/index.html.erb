@@ -27,9 +27,10 @@
     </div>
     <div class="col-9 text-center d-flex">
       <% @training_posts.each do |training_post| %>
-        <%= link_to training_post_path(training_post.id), class: "text-decoration-none" do %>
-          <div class="p-4">
-            <div><%= image_tag training_post.get_post_image(100,100) %></div>
+      <div class="row">
+          <div class="col p-4">
+        <%= link_to training_post_path(training_post.id) do %>
+            <div><%= image_tag training_post.get_post_image(200,200) %></div>
             <div><%= training_post.point %></div>
             <div><%= training_post.condition %></div>
             <div><%= training_post.size %></div>
@@ -37,8 +38,9 @@
               <span>♥<%= training_post.fights.count %></span>
               <span>C<%= training_post.training_post_comments.count %></span>
             </div>
-          </div>
         <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

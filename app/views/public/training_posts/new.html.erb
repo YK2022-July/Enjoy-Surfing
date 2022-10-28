@@ -7,93 +7,132 @@
   <div class='row text-center'>
     <div class="col">
       <%= form_with(model: @training_post, method: :post, local:true) do |training_post| %>
-        <div>練習日</div>
-        <div>
-          <%= training_post.date_field :date %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">練習日</em>
+          <div class="pt-2">
+            <%= training_post.date_field :date %>
+          </div>
         </div>
-        <div>練習時間</div>
-        <div>
-          開始<%= training_post.time_field :start_time %>
-          終了<%= training_post.time_field :end_time %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">練習時間</em>
+          <div class="pt-2">
+            <em class="font-weight-bold text-secondary bg-light">開始</em>
+              <%= training_post.time_field :start_time %>
+            <em class="font-weight-bold text-secondary bg-light">終了</em>
+              <%= training_post.time_field :end_time %>
+          </div>
         </div>
-        <div>ラウンド</div>
-        <div>
-          <%= training_post.text_field :round %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">ラウンド</em>
+          <div class="pt-2">
+            <%= training_post.text_field :round, placeholder: "数字で入力してください", size: "40" %>
+          </div>
         </div>
-        <div>エリア</div>
-        <div>
-          <%= training_post.collection_select(:area, @areas, :name, :name, include_blank: '--選択してください--' ) %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">エリア</em>
+          <div class="pt-2">
+            <%= training_post.collection_select(:area, @areas, :name, :name, include_blank: '--選択してください--' ) %>
+          </div>
         </div>
-        <div>ポイント</div>
-        <div>
-          <%= training_post.text_field :point %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">ポイント</em>
+          <div class="pt-2">
+            <%= training_post.text_field :point, placeholder: "例） 志田下", size: "40" %>
+          </div>
         </div>
-        <div>天気</div>
-        <div>
-          <%= training_post.text_field :weather %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">天気</em>
+          <div class="pt-2">
+            <%= training_post.text_field :weather, placeholder: "例） 晴れ", size: "40" %>
+          </div>
         </div>
-        <div>風向き</div>
-        <div>
-          <%= training_post.text_field :wind%>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">風向き</em>
+          <div class="pt-2">
+            <%= training_post.text_field :wind, placeholder: "例） オフショア", size: "40" %>
+          </div>
         </div>
-        <div>コンディション</div>
-        <div>
-          <%= training_post.text_field :condition %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">コンディション</em>
+          <div class="pt-2">
+            <%= training_post.select :condition, [['Excellent'], ['Good'], ['Fun'], ['Average'], ['Hard'], ['Bad']], { include_blank: '--選択してください--'} %>
+          </div>
         </div>
-        <div>波サイズ</div>
-        <div>
-          <%= training_post.text_field :size %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">波サイズ</em>
+          <div class="pt-2">
+            <%= training_post.text_field :size, placeholder: "例） 胸〜肩・セット頭", size: "40" %>
+          </div>
         </div>
-        <div>人数</div>
-        <div>
-          <%= training_post.text_field :people %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">人数</em>
+          <div class="pt-2">
+            <%= training_post.text_field :people, placeholder: "数字で入力してください", size: "40" %>
+          </div>
         </div>
-        <div>使用ボード</div>
-        <div>
-          <%= training_post.text_field :board %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">使用ボード</em>
+          <div class="pt-2">
+            <%= training_post.text_field :board, placeholder: "例） SHARPEYE SURFBOARDS STORMS 5\'9\"", size: "40" %>
+          </div>
         </div>
-        <div>着用ウェットスーツ</div>
-        <div>
-          <%= training_post.collection_select(:wetsuit, @wetsuits, :name, :name, include_blank: '--選択してください--') %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">着用ウェットスーツ</em>
+          <div class="pt-2">
+            <%= training_post.collection_select(:wetsuit, @wetsuits, :name, :name, include_blank: '--選択してください--') %>
+          </div>
         </div>
-        <div>テイクオフ回数</div>
-        <div>
-          <%= training_post.text_field :take_off %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">テイクオフ回数</em>
+          <div class="pt-2">
+            <%= training_post.text_field :take_off, placeholder: "数字で入力してください", size: "40" %>
+          </div>
         </div>
-        <div>画像選択</div>
-        <div>
-          <%= training_post.file_field :post_image, accept: "image/*" %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">画像選択</em>
+          <div class="pt-2">
+            <%= training_post.file_field :post_image, accept: "image/*" %>
+          </div>
         </div>
-        <div>NOTE</div>
-        <div>
-          <%= training_post.text_area :body, size: "50x10" %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">NOTE</em>
+          <div class="pt-2">
+            <%= training_post.text_area :body, placeholder: "練習の記録を自由に記入してみましょう！", size: "50x10" %>
+          </div>
         </div>
-        <div class='form-group'>
-          <%= training_post.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-            <div class='form-check'>
-              <%= tag.label class: 'form-check-label' do %>
-                <%= tag.check_box class: 'form-check-input' %>
-                <%= tag.text %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">タグ</em>
+          <div class="form-group pt-2">
+            <%= training_post.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+              <div class="form-check">
+                <%= tag.label class: 'form-check-label' do %>
+                  <%= tag.check_box class: 'form-check-input' %>
+                  <%= tag.text %>
               <% end %>
-            </div>
-          <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <div>公開設定</div>
-        <span class="p-2">
-          <%= training_post.label :is_active, "公開", value: true %>
-          <%= training_post.radio_button :is_active, 'true' %>
-        </span>
-        <span class="p-2">
-          <%= training_post.label :is_active, "非公開", value: false %>
-          <%= training_post.radio_button :is_active,'false' %>
-        </span>
-        <div>
-          <%= training_post.submit '投稿' %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">公開設定</em>
+          <div class="pt-2">
+            <span class="p-2">
+              <%= training_post.label :is_active, "公開", value: true %>
+              <%= training_post.radio_button :is_active, 'true' %>
+            </span>
+            <span class="p-2">
+              <%= training_post.label :is_active, "非公開", value: false %>
+              <%= training_post.radio_button :is_active,'false' %>
+            </span>
+          </div>
+        </div>
+        <div class="p-3">
+          <span><%= training_post.submit '投稿', class:"btn btn-primary btn-lg" %></span>
         </div>
       <% end %>
     </div>
   </div>
-  <div>
-    <%= link_to "戻る", my_page_path(current_end_user.id) %>
+  <div class="pb-4 ml-2">
+    <%= link_to "マイページに戻る", my_page_path(current_end_user.id) %>
   </div>
 </div>
