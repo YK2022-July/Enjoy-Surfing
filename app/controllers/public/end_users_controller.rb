@@ -1,4 +1,7 @@
 class Public::EndUsersController < ApplicationController
+  before_action :authenticate_end_user!
+  before_action :correct_end_user, only: [:edit, :update, :unsubscribe, :cancel]
+
   def create
     @user_image = EndUser.new(end_user_params)
     @user_image.id = current_end_user.id
@@ -41,6 +44,13 @@ class Public::EndUsersController < ApplicationController
     @end_user.update(is_deleted: true)
     reset_session
     redirect_to after_cancel_path
+  end
+
+  def correct_end_user
+    @end_user = EndUser.find(params[:id])
+    unless @end_user.id == current_end_user.id
+      redirect_to my_page_path(current_end_user)
+    end
   end
 
   private

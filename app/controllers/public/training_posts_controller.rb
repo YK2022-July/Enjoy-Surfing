@@ -1,4 +1,7 @@
 class Public::TrainingPostsController < ApplicationController
+  before_action :authenticate_end_user!
+  before_action :correct_training_post, only: [:edit, :update, :destroy]
+
   def new
     @training_post = TrainingPost.new
     @areas = Area.all
@@ -56,6 +59,12 @@ class Public::TrainingPostsController < ApplicationController
     redirect_to training_posts_index_path
   end
 
+  def correct_training_post
+    @training_post = TrainingPost.find(params[:id])
+    unless @training_post.end_user.id == current_end_user.id
+      redirect_to my_page_path(current_end_user)
+    end
+  end
 
   private
 
