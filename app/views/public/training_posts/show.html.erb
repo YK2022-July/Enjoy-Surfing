@@ -38,7 +38,11 @@
         </tr>
         <tr>
           <th class="table-primary">エリア／ポイント</th>
-          <td><%= @training_post.area %>／<%= @training_post.point %></td>
+          <% if @training_post.point == "" %>
+            <td><%= @training_post.area %></td>
+          <% else %>
+            <td><%= @training_post.area %>／<%= @training_post.point %></td>
+          <% end %>
         </tr>
         <tr>
           <th class="table-primary">天気</th>
@@ -62,7 +66,7 @@
         </tr>
         <tr>
           <th class="table-primary">人数</th>
-          <% if @training_post.people != nil %>
+          <% if @training_post.people != "" %>
             <td><%= @training_post.people %>人</td>
           <% end %>
         </tr>
@@ -112,7 +116,8 @@
     <div class="col-6">
       <!-- コメントボタン -->
       <button class="btn" data-toggle="modal" data-target="#comments">
-        コメント<%= @training_post.training_post_comments.count %>
+        <span class="icon-size"><i class="fas fa-comment-dots"></i></span>
+        <span><%= @training_post.training_post_comments.count %></span>
       </button>
       <!-- コメント表示ポップアップ -->
       <div class="modal fade" id="comments" aria-hidden="true">
@@ -154,7 +159,8 @@
     <div class="col-12">
       <!-- 応援ボタン -->
       <button class="btn" data-toggle="modal" data-target="#fight-pushed-user">
-        ♥<%= @training_post.fights.count %>
+        <span class="icon-size"><i class="fas fa-thumbs-up"></i></span>
+        <span><%= @training_post.fights.count %></span>
       </button>
       <!-- 応援ユーザー表示ポップアップ -->
       <div class="modal fade" id="fight-pushed-user" aria-hidden="true">

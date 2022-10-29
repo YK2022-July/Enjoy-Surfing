@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'public/homes';
 @import 'public/end_users';
 @import 'admin/homes';
@@ -21,3 +22,13 @@ main {
   font-size: 12px;
 }
 
+.icon-size {
+  font-size: 30px;
+}
+
+.btn-position {
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  vertical-align:　middle;
+}
