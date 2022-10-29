@@ -26,3 +26,4 @@ class TrainingPost < ApplicationRecord
     fights.exists?(end_user_id: end_user.id)
   end
 end
+

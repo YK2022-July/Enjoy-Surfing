@@ -8,9 +8,6 @@
       <ul class="navbar-nav ml-auto">
       <% if end_user_signed_in? %>
         <li class="mr-3">
-          <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete, class: "btn btn-outline-secondary rounded-0 p-4" %>
-        </li>
-        <li class="mr-3">
           <%= link_to "TOP", root_path, class: "btn btn-outline-secondary rounded-0 p-4" %>
         </li>
         <li class="mr-3">
@@ -19,10 +16,10 @@
         <li class="mr-3">
           <%= link_to "みんなの記録", training_posts_index_path, class: "btn btn-outline-secondary rounded-0 p-4" %>
         </li>
-      <% elsif admin_signed_in? %>
         <li class="mr-3">
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary rounded-0 p-4" %>
+          <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete, class: "btn btn-outline-secondary rounded-0 p-4" %>
         </li>
+      <% elsif admin_signed_in? %>
         <li class="mr-3">
           <%= link_to "TOP", admin_top_path, class: "btn btn-outline-secondary rounded-0 p-4" %>
         </li>
@@ -31,6 +28,9 @@
         </li>
         <li class="mr-3">
           <%= link_to "投稿管理", admin_training_post_comments_path, class: "btn btn-outline-secondary rounded-0 p-4" %>
+        </li>
+        <li class="mr-3">
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary rounded-0 p-4" %>
         </li>
       <% else %>
         <li class="mr-3">

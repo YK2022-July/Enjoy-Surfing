@@ -19,14 +19,18 @@
           </tr>
         </thead>
         <tbody>
-          <% @training_posts.each do |training_post| %>
+          <% @training_posts.order(created_at: "DESC").each do |training_post| %>
             <tr>
               <td>
                 <%= link_to training_post_path(training_post.id) do %>
                   <%= image_tag training_post.get_post_image(100,100) %>
                 <% end %>
               </td>
-              <td><%= training_post.area %>／<%= training_post.point %></td>
+              <% if training_post.point == "" %>
+                <td><%= training_post.area %></td>
+              <% else %>
+                <td><%= training_post.area %>／<%= training_post.point %></td>
+              <% end %>
               <td><%= training_post.condition %></td>
               <td><%= training_post.date %></td>
               <td><%= training_post.round %></td>
