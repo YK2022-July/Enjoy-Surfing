@@ -1,6 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'public/homes';
 @import 'public/end_users';
+@import 'admin/homes';
+
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
 
 .bg-midnightblue {
   background-color: #191970;

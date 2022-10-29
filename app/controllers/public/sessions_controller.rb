@@ -16,10 +16,9 @@ class Public::SessionsController < Devise::SessionsController
     @end_user = EndUser.find_by(email: params[:end_user][:email])
     if @end_user
       if (@end_user.valid_password?(params[:end_user][:password]) && (@end_user.active_for_authentication? == false))
-        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
-        redirect_to new_end_user_registration_path
+        redirect_to new_end_user_registration_path, flash: {unsubscribed_user_notice: "退会済みです。再度ご登録をしてご利用ください。"}
       else
-        flash[:notice] = "必須項目を入力してください。"
+        flash[:unsubscribed_user_notice] = "必須項目を入力してください。"
       end
     end
   end

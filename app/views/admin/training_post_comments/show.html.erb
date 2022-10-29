@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row text-center">
-    <div class="col">
-      <h3>投稿（コメント）詳細</h3>
+    <div class="col pt-2">
+      <h3 class="font-weight-bold">投稿（コメント）詳細</h3>
     </div>
   </div>
   <div class="row my-3">
-    <div class="row mx-auto d-flex flex-column">
+    <div class="row mx-auto d-flex flex-column w-75">
       <div class="col">
       <table class="table table-bordered text-left">
         <tr>
@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <th scope="row">コメント内容</th>
-          <td class="text-break"><%= @comment.comment %></td>
+          <td class="text-break"><%= safe_join(@comment.comment.split("\n"),tag(:br)) %></td>
         </tr>
       </table>
       </div>
@@ -32,5 +32,8 @@
           </div>
       </div>
     </div>
+  </div>
+  <div class="pb-4 ml-2">
+    <%= link_to "投稿（コメント）一覧に戻る", admin_training_post_comments_path %>
   </div>
 </div>
