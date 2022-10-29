@@ -15,7 +15,7 @@
         </div>
         <div class="pb-3">
           <em class="font-weight-bold text-secondary bg-light">ニックネーム</em>
-          <% if @end_user.email = "guest@example.com" %>
+          <% if @end_user.email == "guest@example.com" %>
             <div class="text-danger pt-2">
               ※ゲストユーザーはニックネームを編集できません。
             </div>
