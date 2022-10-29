@@ -16,7 +16,7 @@ class Public::EndUsersController < ApplicationController
     @immediate_goal = ImmediateGoal.where(end_user_id: @end_user.id).last
     @today_goal = TodayGoal.where(end_user_id: @end_user.id).last
     @user_image = EndUser.new
-    @training_posts = current_end_user.training_posts.all
+    @training_posts = current_end_user.training_posts.all.order(date: "DESC")
   end
 
   def edit
