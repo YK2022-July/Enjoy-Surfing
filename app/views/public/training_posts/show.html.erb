@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row text-center d-flex flex-column">
-    <div class="col">
-      <h3><%= @training_post.date %>の<%= @end_user.name %>さんの記録</h3>
+    <div class="col pt-2 pb-4">
+      <h3 class="font-weight-bold"><%= @training_post.date %>の<%= @end_user.name %>さんの記録</h3>
     </div>
     <% if @end_user == current_end_user %>
     <div class="col">
@@ -16,11 +16,11 @@
   </div>
   <div class="row text-center py-2">
     <div class="col">
-      <%= image_tag @training_post.get_post_image(400,300) %>
+      <%= image_tag @training_post.get_post_image(700,525), class:"img-thumbnail" %>
     </div>
   </div>
   <div class="row text-center justify-content-center">
-    <div class="col-4 pr-0">
+    <div class="col-8">
       <table class="table table-bordered table-sm">
         <tr>
           <th class="table-primary">練習日時</th>
@@ -38,7 +38,11 @@
         </tr>
         <tr>
           <th class="table-primary">エリア／ポイント</th>
-          <td><%= @training_post.point %></td>
+          <% if @training_post.point == "" %>
+            <td><%= @training_post.area %></td>
+          <% else %>
+            <td><%= @training_post.area %>／<%= @training_post.point %></td>
+          <% end %>
         </tr>
         <tr>
           <th class="table-primary">天気</th>
@@ -48,10 +52,10 @@
           <th class="table-primary">風向き</th>
           <td><%= @training_post.wind %></td>
         </tr>
-      </table>
+      <!--</table>-->
     </div>
-    <div class="col-4 pl-0">
-      <table class="table table-bordered table-sm">
+    <div class="col-8">
+      <!--<table class="table table-bordered table-sm">-->
         <tr>
           <th class="table-primary">コンディション</th>
           <td><%= @training_post.condition %></td>
@@ -62,7 +66,9 @@
         </tr>
         <tr>
           <th class="table-primary">人数</th>
-          <td><%= @training_post.people %></td>
+          <% if @training_post.people != "" %>
+            <td><%= @training_post.people %>人</td>
+          <% end %>
         </tr>
         <tr>
           <th class="table-primary">使用ボード</th>
@@ -70,7 +76,13 @@
         </tr>
         <tr>
           <th class="table-primary">ウェットスーツ</th>
-          <td><%= @training_post.wetsuit%></td>
+          <td><%= @training_post.wetsuit %></td>
+        </tr>
+        <tr>
+          <th class="table-primary">テイクオフ回数</th>
+          <% if @training_post.take_off != nil %>
+            <td><%= @training_post.take_off %>回</td>
+          <% end %>
         </tr>
       </table>
     </div>
@@ -80,7 +92,7 @@
       <table class="table table-bordered table-sm">
         <thead class="table-primary text-center">
           <tr>
-            <th scope="col">MEMO</th>
+            <th scope="col">NOTE</th>
           </tr>
         </thead>
         <tbody>
@@ -100,12 +112,12 @@
       <% end %>
     </div>
   </div>
-  </div>
-  <div class="row text-center justify-content-center pb-3">
-    <div class="col-4">
+  <div class="row pb-3">
+    <div class="col-6">
       <!-- コメントボタン -->
       <button class="btn" data-toggle="modal" data-target="#comments">
-        コメント<%= @training_post.training_post_comments.count %>
+        <span class="icon-size"><i class="fas fa-comment-dots"></i></span>
+        <span><%= @training_post.training_post_comments.count %></span>
       </button>
       <!-- コメント表示ポップアップ -->
       <div class="modal fade" id="comments" aria-hidden="true">
@@ -128,27 +140,27 @@
                 <%= render 'public/training_post_comments/comment', training_post: @training_post %>
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer mx-auto mb-3">
               <div class="comment_form">
                 <%= render 'public/training_post_comments/form', training_post: @training_post, training_post_comment: @training_post_comment %>
               </div>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <% if @training_post.end_user != current_end_user %>
-    <div class="col text-center justify-content-center pb-3">
+    <div class="col-6">
       <div id="fights_<%= @training_post.id %>">
         <%= render 'public/fights/fight', training_post: @training_post %>
       </div>
     </div>
     <% else %>
-    <div class="col-4">
+    <div class="col-12">
       <!-- 応援ボタン -->
       <button class="btn" data-toggle="modal" data-target="#fight-pushed-user">
-        ♥<%= @training_post.fights.count %>
+        <span class="icon-size"><i class="fas fa-thumbs-up"></i></span>
+        <span><%= @training_post.fights.count %></span>
       </button>
       <!-- 応援ユーザー表示ポップアップ -->
       <div class="modal fade" id="fight-pushed-user" aria-hidden="true">
@@ -182,12 +194,12 @@
       </div>
     </div>
   </div>
-  <div class="row justify-content-center">
-    <div class="col-2 btn btn-success">
-    <%= link_to "記録を編集する", training_posts_edit_path(@training_post) %>
+  <div class="row py-5">
+    <div class="col text-right">
+      <%= link_to "編集", training_posts_edit_path(@training_post), class:"btn btn-success btn-lg" %>
     </div>
-    <div class="col-2 btn btn-danger">
-    <%= link_to "記録を削除する", training_posts_destroy_path(@training_post), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+    <div class="col">
+      <%= link_to "削除", training_posts_destroy_path(@training_post), method: :delete, data: {confirm: "本当に削除しますか？"},  class:"btn btn-danger btn-lg" %>
     </div>
   </div>
   <% end %>

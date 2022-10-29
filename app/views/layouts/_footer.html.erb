@@ -1,0 +1,8 @@
+  <div class="p-4">
+    <% if end_user_signed_in? %>
+      <li class="text-center pb-3 text-size", style="list-style: none;">
+        <%= link_to "退会手続き", unsubscribe_path(current_end_user) %>
+      </li>
+    <% end %>
+    <center class="text-light">-Enjoy Surfing!!-</center>
+  </div>

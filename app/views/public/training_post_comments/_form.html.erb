@@ -1,4 +1,4 @@
 <%= form_with model:[training_post, training_post_comment], local: false do |f| %>
-    <%= f.text_area :comment, size:"40x5" %>
-    <%= f.submit "送信" %>
+    <div><%= f.text_area :comment, size:"40x5" %></div>
+    <div><%= f.submit "応援メッセージを送信", class:"btn btn-info btn-sm" %></div>
 <% end %>

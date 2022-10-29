@@ -1,19 +1,51 @@
 <div class="container">
   <div class="row text-center">
-    <div class="col">
-      <h3><%= current_end_user.name %>さんの記録</h3>
+    <div class="col pt-2 pb-4">
+      <h3 class="font-weight-bold"><%= current_end_user.name %>さんの記録</h3>
     </div>
   </div>
-  <div class="row text-center d-flex flex-wrap">
-    <% @training_posts.each do |training_post| %>
-      <%= link_to training_posts_path(training_post.id), class: "text-decoration-none" do %>
-        <div class="col p-4">
-          <div><%= image_tag training_post.get_post_image(100,100) %></div>
-          <div><%= training_post.point %></div>
-          <div><%= training_post.condition %></div>
-          <div><%= training_post.size %></div>
-        </div>
-      <% end %>
-    <% end %>
+  <div class="row text-center">
+    <div class="col text-center">
+      <table class='table table-hover table-inverse'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>エリア／ポイント</th>
+            <th>コンディション</th>
+            <th>練習日</th>
+            <th>ラウンド</th>
+            <th></th>
+            <th colspan="8"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @training_posts.order(created_at: "DESC").each do |training_post| %>
+            <tr>
+              <td>
+                <%= link_to training_post_path(training_post.id) do %>
+                  <%= image_tag training_post.get_post_image(100,100) %>
+                <% end %>
+              </td>
+              <% if training_post.point == "" %>
+                <td><%= training_post.area %></td>
+              <% else %>
+                <td><%= training_post.area %>／<%= training_post.point %></td>
+              <% end %>
+              <td><%= training_post.condition %></td>
+              <td><%= training_post.date %></td>
+              <td><%= training_post.round %></td>
+              <td>
+                <span><i class="fas fa-thumbs-up"></i></span>
+                <span><%= training_post.fights.count %></span>
+              </td>
+              <td>
+                <span><i class="fas fa-comment-dots"></i></span>
+                <span><%= training_post.training_post_comments.count %></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

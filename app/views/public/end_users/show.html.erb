@@ -1,58 +1,71 @@
+<p class="text-success"><%= flash[:guest_user_notice] %></p>
 <div class='container'>
   <div class='row text-center'>
-    <div class="col">
-      <h1><%= @end_user.name %>さんのマイページ</h1>
+    <div class="col pt-2 pb-4">
+      <% if @end_user == current_end_user %>
+        <h1 class="font-weight-bold"><%= @end_user.name %>さんのマイページ</h1>
+      <% else %>
+        <h1 class="font-weight-bold"><%= @end_user.name %>さんを応援しましょう！</h1>
+      <% end %>
     </div>
   </div>
   <div class='row'>
     <div class="col-3">
-      <div>プロフィール</div>
+      <h3 class="font-weight-bold bg-light">Profile</h3>
       <div class="py-2"><%= image_tag @end_user.get_user_image(100,100) %></div>
-      <div class="pb-3"><%= render "user_image" %></div>
-      <!--<div><%#= link_to "プロフィール画像を変更" %></div>-->
-      <div>ユーザーネーム</div>
-      <div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">ユーザーネーム</div>
+      <div class="p-2">
         <%= @end_user.name %>
       </div>
-      <div>年齢</div>
-      <div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">年齢</div>
+      <div class="p-2">
         <%= @end_user.age %>
       </div>
-      <div>性別</div>
-      <div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">性別</div>
+      <div class="p-2">
         <%= @end_user.sex %>
       </div>
-      <div>エリア</div>
-      <div>
-        <%= @end_user.area_id %>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">エリア</div>
+      <div class="p-2">
+        <%= @end_user.area %>
       </div>
-      <div>ホーム</div>
-      <div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">ホームポイント</div>
+      <div class="p-2">
         <%= @end_user.home %>
       </div>
-      <div>種目</div>
-      <div>
-        <%= @end_user.type_id %>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">メイン種目</div>
+      <div class="p-2">
+        <%= @end_user.type_name %>
       </div>
-      <div>スタンス</div>
-      <div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">スタンス</div>
+      <div class="p-2">
         <%= @end_user.stance %>
       </div>
-      <div>サーフィン歴</div>
-      <div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">サーフィン歴</div>
+      <div class="p-2">
         <%= @end_user.history %>
       </div>
-      <div>自己紹介</div>
-      <div>
+      <div class="font-weight-bold font-italic text-black-50 bg-light">自己紹介</div>
+      <div class="pt-2 pb-5">
         <%= @end_user.introduction %>
       </div>
-      <div><%= link_to "プロフィールを編集", end_user_edit_path %></div>
+      <% if @end_user == current_end_user %>
+        <div class="font-size pt-3 pb-5">
+          <u><%= link_to "プロフィールを編集", end_user_edit_path %></u>
+        </div>
+      <% end %>
     </div>
     <div class="col-6">
-      <div class="border border-5">
+      <div class="border rounded-lg">
+        <div class="font-weight-bold font-italic text-black-50 bg-light text-center">
+          最終目標
+        </div>
         <ul>
           <li><%= @goal&.goal %></li>
         </ul>
+        <div class="font-weight-bold font-italic text-black-50 bg-light text-center">
+          中間目標
+        </div>
         <ul>
           <li><%= @immediate_goal&.goal1 %></li>
         </ul>
@@ -62,6 +75,9 @@
             <li><%= @immediate_goal&.goal2 %></li>
           </ul>
           <% end %>
+        <div class="font-weight-bold font-italic text-black-50 bg-light text-center">
+          本日の目標
+        </div>
         <ul>
           <li><%= @today_goal&.goal1 %></li>
         </ul>
@@ -78,16 +94,104 @@
           </ul>
           <% end %>
       </div>
+      <% if @end_user == current_end_user %>
+        <div class="pt-3">
+          <div class="font-weight-bold font-italic text-black-50 bg-light">
+            最近のアクティビティ
+          </div>
+          <% @training_posts.each do |training_post| %>
+            <% training_post.fights.order(created_at: "DESC").each_with_index do |fight, count| %>
+            <% break if count == 3 %>
+            <div class="pt-2">
+              <div>
+                <%= link_to my_page_path(fight.end_user), class: "text-dark" do %>
+                  <span><%= image_tag fight.end_user.get_user_image(50,50) %></span>
+                  <span><i class="fas fa-thumbs-up"></i></span>
+                  <span class="font-weight-bold"><%= fight.end_user.name %></span>
+                <% end %>
+                さん</br>
+                <span class="row">
+                <%= link_to training_post_path(training_post.id), class: "text-decoration-none text-dark" do %>
+                  <span class="col-9">が「応援」を押しました。</span>
+                <% end %>
+                  <span class="col-3 ml-auto"><%= fight.created_at.strftime("%Y-%m-%d") %></span>
+                </span>
+                <div class="pt-2 w-100 border-bottom"></div>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="pt-3">
+          <div class="font-weight-bold font-italic text-black-50 bg-light">
+            最近のコメント
+          </div>
+          <div>
+          <% @training_posts.each do |training_post| %>
+            <% training_post.training_post_comments.order(created_at: "DESC").each_with_index do |comment, count| %>
+            <% break if count == 3 %>
+            <div class="pt-2">
+              <div>
+                <%= link_to my_page_path(comment.end_user), class: "text-dark" do %>
+                  <span><%= image_tag comment.end_user.get_user_image(50,50) %></span>
+                  <span><i class="fas fa-comment-dots"></i></span>
+                  <span class="font-weight-bold"><%= comment.end_user.name %></span>
+                <% end %>
+                さん
+              </div>
+              <div class="row">
+                <%= link_to training_post_path(training_post.id), class: "text-decoration-none text-dark" do %>
+                  <span class="col-9"><%= comment.comment.truncate(23) %></span>
+                <% end %>
+                <span class="col-3 ml-auto"><%= comment.created_at.strftime("%Y-%m-%d") %></span>
+             </div>
+              <div class="pt-2 w-100 border-bottom"></div>
+            </div>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="pt-4 pb-5">
+          <div class="font-weight-bold font-italic text-black-50 bg-light">
+            最近の<%= @end_user.name %>さんの記録
+          </div>
+          <div class="pt-2">
+          <table>
+            <% @end_user.training_posts.first(5).each do |training_post| %>
+              <tr>
+                <td class="w-25 pb-3">
+                  <%= link_to training_post_path(training_post.id) do %>
+                    <%= image_tag training_post.get_post_image(80,80) %>
+                  <% end %>
+                </td>
+                <td class="w-50 pb-3 pr-5"><%= training_post.area %>／<%= training_post.point %></td>
+                <td class="w-25 pb-3"><%= training_post.date %></td>
+              </tr>
+            <% end %>
+          </table>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="btn-wrapper col-3">
-      <div class="row">
-        <%= link_to "トレーニング目標を設定する", new_goal_path, class:"btn btn-warning btn-sm btn-block mb-3" %>
+    <div class="col-3">
+      <div class="d-flex align-items-center justify-content-center flex-column w-100 h-50 bg-secondary py-5 text-light">
+        <h2>New Contens</h2>
+        <h2>Coming Soon...</h2>
       </div>
-      <div class="row">
-        <%= link_to "トレーニングを記録する",  training_posts_new_path, class:"btn btn-success btn-sm btn-block mb-3" %>
-      </div>
-      <div class="row">
-        <%= link_to "自分の記録を見る",  training_posts_my_posts_path, class:"btn btn-funky-moon btn-sm btn-block mb-3" %>
+      <div class="btn-wrapper pt-5">
+      <h3 class="font-weight-bold bg-light">Menu</h3>
+        <div class="row text-center d-flex flex-column pt-3">
+          <div class="col w-100">
+            <%= link_to "目標を設定する", new_goal_path, class:"btn btn-orange-gradient btn-block mb-3" %>
+          </div>
+          <div class="col w-100">
+            <%= link_to "トレーニングを記録する",  training_posts_new_path, class:"btn btn-blue-gradient btn-block mb-3" %>
+          </div>
+          <div class="col w-100">
+            <%= link_to "自分の記録を見る",  training_posts_my_posts_path, class:"btn btn-pink-gradient btn-block mb-3" %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

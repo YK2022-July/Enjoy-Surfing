@@ -1,2 +1,13 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container w-100 btn-position">
+  <div class="row">
+    <div class="col pb-4">
+      <h2 class="font-weight-bold">管理者用メニュー</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col pt-2 d-flex">
+        <%= link_to "ユーザー管理",  admin_end_users_path, class:"btn btn-info btn-size border border-light mr-4" %>
+        <%= link_to "投稿管理",  admin_training_post_comments_path, class:"btn btn-info btn-size border border-light" %>
+    </div>
+  </div>
+</div>

@@ -1,50 +1,80 @@
 <div class='container'>
   <div class='row text-center'>
-    <div class="col">
-      <h1>プロフィール編集</h1>
+    <div class="col pt-2 pb-4">
+      <h3 class="font-weight-bold">プロフィール編集</h3>
     </div>
   </div>
   <div class='row text-center'>
     <div class="col">
       <%= form_with(model: @end_user, url: end_user_update_path(@end_user.id), method: :patch, local:true) do |end_user| %>
-        <div>ニックネーム</div>
-        <div>
-          <%= end_user.text_field :name %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">プロフィール画像</em>
+          <div class="pt-2">
+            <%= end_user.file_field :user_image, accept: "image/*" %>
+          </div>
         </div>
-        <div>年齢</div>
-        <div>
-          <%= end_user.text_field :age %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">ニックネーム</em>
+          <% if @end_user.email == "guest@example.com" %>
+            <div class="text-danger pt-2">
+              ※ゲストユーザーはニックネームを編集できません。
+            </div>
+          <% else %>
+            <div class="pt-2">
+              <%= end_user.text_field :name, style: "width:30%" %>
+            </div>
+          <% end %>
         </div>
-        <div>性別</div>
-        <div>
-          <%= end_user.text_field :sex %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">年齢</em>
+          <div class="pt-2">
+            <%= end_user.select :age, [['10歳未満'], ['10代'], ['20代'], ['30代'], ['40代'], ['50代'], ['60歳以上']], { include_blank: '--選択してください--', selected: current_end_user.age }, style: "width:30%" %>
+          </div>
         </div>
-        <div>エリア</div>
-        <div>
-          <%= end_user.text_field :area_id %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">性別</em>
+          <div class="pt-2">
+            <%= end_user.select :sex, [['男性'], ['女性']], { include_blank: '--選択してください--', selected: current_end_user.sex }, style: "width:30%" %>
+          </div>
         </div>
-        <div>ホーム</div>
-        <div>
-          <%= end_user.text_field :home %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">エリア</em>
+          <div class="pt-2">
+            <%= end_user.collection_select(:area, @areas, :name, :name, include_blank: '--選択してください--' ) %>
+          </div>
         </div>
-        <div>種目</div>
-        <div>
-          <%= end_user.text_field :type_id %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">ホームポイント</em>
+          <div class="pt-2">
+            <%= end_user.text_field :home, style: "width:30%" %>
+          </div>
         </div>
-        <div>スタンス</div>
-        <div>
-          <%= end_user.text_field :stance %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">メイン種目</em>
+          <div class="pt-2">
+            <%= end_user.select :type_name, [['ショートボード'], ['ロングボード'], ['ボディボード']], { include_blank: '--選択してください--', selected: current_end_user.type_name }, style: "width:30%" %>
+          </div>
         </div>
-        <div>サーフィン歴</div>
-        <div>
-          <%= end_user.text_field :history %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">スタンス</em>
+          <div class="pt-2">
+            <%= end_user.select :stance, [['レギュラー'], ['グーフィー']], { include_blank: '--選択してください--', selected: current_end_user.stance }, style: "width:30%" %>
+          </div>
         </div>
-        <div>自己紹介</div>
-        <div>
-          <%= end_user.text_area :introduction %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">サーフィン歴</em>
+          <div class="pt-2">
+            <%= end_user.text_field :history, style: "width:30%" %>
+          </div>
         </div>
-        <div>
-          <%= end_user.submit '更新' %>
+        <div class="pb-3">
+          <em class="font-weight-bold text-secondary bg-light">自己紹介</em>
+          <div class="pt-2">
+            <%= end_user.text_area :introduction, size: "40x5" %>
+          </div>
+        </div>
+        <div class="py-4">
+          <%= end_user.submit '更新', class:"btn btn-success btn-lg" %>
         </div>
       <% end %>
     </div>

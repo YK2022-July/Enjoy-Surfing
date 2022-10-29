@@ -11,52 +11,14 @@
   </head>
 
   <body>
-    <header>
-    <% if end_user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
-      </li>
-      <li>
-        <%= link_to "TOP", root_path %>
-      </li>
-      <li>
-        <%= link_to "MyPage", my_page_path(current_end_user.id) %>
-      </li>
-      <li>
-        <%= link_to "みんなの記録", training_posts_index_path %>
-      </li>
-    <% elsif admin_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
-      <li>
-        <%= link_to "TOP", admin_top_path %>
-      </li>
-      <li>
-        <%= link_to "ユーザー管理", admin_end_users_path %>
-      </li>
-      <li>
-        <%= link_to "投稿管理", admin_administrate_path %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_end_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_end_user_session_path %>
-      </li>
-    <% end %>
+    <header class="bg-midnightblue">
+      <%= render 'layouts/header' %>
     </header>
     <main>
-    <p class="notice"><%= notice %></p>
     <%= yield %>
     </main>
-    <footer>
-      <% if end_user_signed_in? %>
-        <li>
-          <%= link_to "退会手続き", unsubscribe_path(current_end_user) %>
-        </li>
-      <% end %>
+    <footer class="bg-midnightblue">
+      <%= render 'layouts/footer' %>
     </footer>
   </body>
 </html>

@@ -1,4 +1,14 @@
 class Public::EndUsersController < ApplicationController
+  before_action :authenticate_end_user!
+  before_action :correct_end_user, only: [:edit, :update, :unsubscribe, :cancel]
+
+  def create
+    @user_image = EndUser.new(end_user_params)
+    @user_image.id = current_end_user.id
+    @user_image.save
+    redirect_to request.referer
+  end
+
   def index
     @end_users = EndUser.all
   end
@@ -8,10 +18,13 @@ class Public::EndUsersController < ApplicationController
     @goal = Goal.where(end_user_id: @end_user.id).last
     @immediate_goal = ImmediateGoal.where(end_user_id: @end_user.id).last
     @today_goal = TodayGoal.where(end_user_id: @end_user.id).last
+    @user_image = EndUser.new
+    @training_posts = current_end_user.training_posts.all.order(date: "DESC")
   end
 
   def edit
     @end_user = EndUser.find(params[:id])
+    @areas = Area.all
   end
 
   def update
@@ -33,11 +46,18 @@ class Public::EndUsersController < ApplicationController
     redirect_to after_cancel_path
   end
 
+  def correct_end_user
+    @end_user = EndUser.find(params[:id])
+    unless @end_user.id == current_end_user.id
+      redirect_to my_page_path(current_end_user)
+    end
+  end
+
   private
   def end_user_params
     params.require(:end_user).permit(
-      :area_id,
-      :type_id,
+      :area,
+      :type_name,
       :name,
       :age,
       :sex,
@@ -46,7 +66,7 @@ class Public::EndUsersController < ApplicationController
       :history,
       :introduction,
       :is_deleted,
-      :end_user_image,
+      :user_image,
     )
   end
 end

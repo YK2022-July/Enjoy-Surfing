@@ -1,13 +1,18 @@
 class Public::TrainingPostsController < ApplicationController
+  before_action :authenticate_end_user!
+  before_action :correct_training_post, only: [:edit, :update, :destroy]
+
   def new
     @training_post = TrainingPost.new
+    @areas = Area.all
+    @wetsuits = Wetsuit.all
   end
 
   def create
     @training_post = TrainingPost.new(training_post_params)
     @training_post.end_user_id = current_end_user.id
     @training_post.save
-    redirect_to training_posts_show_path(@training_post.id)
+    redirect_to training_post_path(@training_post.id)
   end
 
   def index
@@ -38,12 +43,14 @@ class Public::TrainingPostsController < ApplicationController
 
   def edit
     @training_post = TrainingPost.find(params[:id])
+    @areas = Area.all
+    @wetsuits = Wetsuit.all
   end
 
   def update
     training_post = TrainingPost.find(params[:id])
     training_post.update(training_post_params)
-    redirect_to training_posts_show_path(training_post.id)
+    redirect_to training_post_path(training_post.id)
   end
 
   def destroy
@@ -52,6 +59,12 @@ class Public::TrainingPostsController < ApplicationController
     redirect_to training_posts_index_path
   end
 
+  def correct_training_post
+    @training_post = TrainingPost.find(params[:id])
+    unless @training_post.end_user.id == current_end_user.id
+      redirect_to my_page_path(current_end_user)
+    end
+  end
 
   private
 
@@ -62,6 +75,7 @@ class Public::TrainingPostsController < ApplicationController
       :start_time,
       :end_time,
       :round,
+      :area,
       :point,
       :weather,
       :wind,
