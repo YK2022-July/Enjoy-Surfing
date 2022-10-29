@@ -62,7 +62,9 @@
         </tr>
         <tr>
           <th class="table-primary">人数</th>
-          <td><%= @training_post.people %>人</td>
+          <% if @training_post.people != nil %>
+            <td><%= @training_post.people %>人</td>
+          <% end %>
         </tr>
         <tr>
           <th class="table-primary">使用ボード</th>
@@ -74,7 +76,9 @@
         </tr>
         <tr>
           <th class="table-primary">テイクオフ回数</th>
-          <td><%= @training_post.take_off %>回</td>
+          <% if @training_post.take_off != nil %>
+            <td><%= @training_post.take_off %>回</td>
+          <% end %>
         </tr>
       </table>
     </div>

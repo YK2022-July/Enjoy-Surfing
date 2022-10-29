@@ -46,7 +46,7 @@
         <%= @end_user.history %>
       </div>
       <div class="font-weight-bold font-italic text-black-50 bg-light">自己紹介</div>
-      <div class="p-2">
+      <div class="pt-2 pb-5">
         <%= @end_user.introduction %>
       </div>
       <% if @end_user == current_end_user %>
@@ -147,6 +147,27 @@
             </div>
             <% end %>
           <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="pt-4 pb-5">
+          <div class="font-weight-bold font-italic text-black-50 bg-light">
+            最近の<%= @end_user.name %>さんの記録
+          </div>
+          <div class="pt-2">
+          <table>
+            <% @end_user.training_posts.first(5).each do |training_post| %>
+              <tr>
+                <td class="w-25 pb-3">
+                  <%= link_to training_post_path(training_post.id) do %>
+                    <%= image_tag training_post.get_post_image(80,80) %>
+                  <% end %>
+                </td>
+                <td class="w-50 pb-3 pr-5"><%= training_post.area %>／<%= training_post.point %></td>
+                <td class="w-25 pb-3"><%= training_post.date %></td>
+              </tr>
+            <% end %>
+          </table>
           </div>
         </div>
       <% end %>
