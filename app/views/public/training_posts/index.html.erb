@@ -47,15 +47,25 @@
                   <%= image_tag training_post.get_post_image(100,100) %>
                 <% end %>
               </td>
-              <td><%= training_post.area %>／<%= training_post.point %></td>
+              <% if training_post.point == "" %>
+                <td><%= training_post.area %></td>
+              <% else %>
+                <td><%= training_post.area %>／<%= training_post.point %></td>
+              <% end %>
               <td><%= training_post.condition %></td>
               <td>
                 <%= link_to my_page_path(training_post.end_user.id) do %>
                   <span class="text-info"><%= training_post.end_user.name %></span>
                 <% end %>
               </td>
-              <td> ♥<%= training_post.fights.count %></td>
-              <td>C<%= training_post.training_post_comments.count %></td>
+              <td>
+                <span><i class="fas fa-thumbs-up"></i></span>
+                <span><%= training_post.fights.count %></span>
+              </td>
+              <td>
+                <span><i class="fas fa-comment-dots"></i></span>
+                <span><%= training_post.training_post_comments.count %></span>
+              </td>
             </tr>
           <% end %>
         </tbody>

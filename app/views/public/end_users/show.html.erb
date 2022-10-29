@@ -106,6 +106,7 @@
               <div>
                 <%= link_to my_page_path(fight.end_user), class: "text-dark" do %>
                   <span><%= image_tag fight.end_user.get_user_image(50,50) %></span>
+                  <span><i class="fas fa-thumbs-up"></i></span>
                   <span class="font-weight-bold"><%= fight.end_user.name %></span>
                 <% end %>
                 さん</br>
@@ -133,6 +134,7 @@
               <div>
                 <%= link_to my_page_path(comment.end_user), class: "text-dark" do %>
                   <span><%= image_tag comment.end_user.get_user_image(50,50) %></span>
+                  <span><i class="fas fa-comment-dots"></i></span>
                   <span class="font-weight-bold"><%= comment.end_user.name %></span>
                 <% end %>
                 さん
