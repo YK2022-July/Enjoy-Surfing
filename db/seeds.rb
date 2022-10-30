@@ -26,7 +26,7 @@ Tag.create([
 
 Admin.create(
    email: 'admin@test.com',
-   password: 'adminadmin',
+   encrypted_password: 'adminadmin',
 )
 
 Area.create([

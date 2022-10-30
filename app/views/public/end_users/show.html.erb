@@ -165,7 +165,11 @@
                     <%= image_tag training_post.get_post_image(80,80) %>
                   <% end %>
                 </td>
-                <td class="w-50 pb-3 pr-5"><%= training_post.area %>／<%= training_post.point %></td>
+                  <% if training_post.point == "" %>
+                    <td class="w-50 pb-3 pr-5"><%= training_post.area %></td>
+                  <% else %>
+                    <td class="w-50 pb-3 pr-5"><%= training_post.area %>／<%= training_post.point %></td>
+                  <% end %>
                 <td class="w-25 pb-3"><%= training_post.date %></td>
               </tr>
             <% end %>
@@ -176,7 +180,7 @@
     </div>
     <div class="col-3">
       <div class="d-flex align-items-center justify-content-center flex-column w-100 h-50 bg-secondary py-5 text-light">
-        <h2>New Contens</h2>
+        <h2>New Contents</h2>
         <h2>Coming Soon...</h2>
       </div>
       <div class="btn-wrapper pt-5">

@@ -34,7 +34,11 @@
 
 ## 設計書
 
-後ほど追記予定
+###テーブル定義書
+- https://docs.google.com/spreadsheets/d/1ZsWo9vFukoIU1k7L6EjNh0S0U7vOhxdq/edit?usp=sharing&ouid=113617976204171176993&rtpof=true&sd=true
+
+###詳細設計書
+- https://docs.google.com/spreadsheets/d/1wm3SwgR0fjZ5GiAYKnDA08HPNPhxGBgmk-EBGHA5An4/edit?usp=sharing
 
 ## 開発環境
 
@@ -47,10 +51,4 @@
 - JSライブラリ：jQuery
 
 - IDE：Cloud9
-
-
-
-## 使用素材
-
-後ほど追記予定
 
